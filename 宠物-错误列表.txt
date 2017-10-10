@@ -1,0 +1,22 @@
+-1010 No Param
+-1011 "?"缺少
+-1012 Login-Exception 
+-1014 Exception - 格式问题
+-1015 输入不完整
+-2001 -2006 不存在这个用户 
+-2003 -2007 密码不正确
+-2004 -2008 无法计算密码 - Digest问题、
+-2005 -2009 无法储存登录信息
+-2010 token 失效
+-2011 token 为空
+
+用户操作API
+
+内部确认用户信息
+http://127.0.0.1:8015/api/user?action=oauth&token=ljSnbAvusICVgYkdc1b
+
+用户手机号登录
+http://127.0.0.1:8015/api/user?action=quick&phone=13520583920&pass=123
+
+用户注册
+http://127.0.0.1:8015/api/user?action=reg&phone=13520583920&pass=123&name=Mingzi
