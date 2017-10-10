@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="smart.utils.data.SmartDeliveryAddrEntity" table="smart_delivery_addr" schema="smartmall">
+        <id name="uid">
+            <column name="uid" sql-type="int(9)"/>
+            <generator class="native" />
+        </id>
+        <property name="addr1">
+            <column name="addr1" sql-type="tinytext"/>
+        </property>
+        <property name="addr2">
+            <column name="addr2" sql-type="tinytext"/>
+        </property>
+        <property name="addr3">
+            <column name="addr3" sql-type="tinytext"/>
+        </property>
+        <property name="addr4">
+            <column name="addr4" sql-type="tinytext"/>
+        </property>
+        <property name="addr5">
+            <column name="addr5" sql-type="tinytext"/>
+        </property>
+    </class>
+</hibernate-mapping>

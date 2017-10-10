@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+
+        <property name="connection.autocommit">true</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/smartmall</property>
+        <property name="connection.username">smartmall</property>
+        <property name="connection.password">smartmall</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection_provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+
+        <property name="c3p0.minPoolSize">3</property>
+        <property name="c3p0.maxPoolSize">5</property>
+        <property name="c3p0.acquireIncrement">1</property>
+        <property name="c3p0.maxStatements">20</property>
+
+        <property name="c3p0.timeout">5</property>
+        <property name="c3p0.idle_test_period">30</property>
+
+        <mapping class="smart.utils.data.SmartDeliveryAddrEntity"/>
+        <mapping resource="smart/utils/data/SmartDeliveryAddrEntity.hbm.xml"/>
+        <mapping resource="smart/utils/data/SmartUsersEntity.hbm.xml"/>
+        <mapping class="smart.utils.data.SmartUsersEntity"/>
+
+        <!-- DB schema will be updated if needed -->
+
+    </session-factory>
+</hibernate-configuration>
