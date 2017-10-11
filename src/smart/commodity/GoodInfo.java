@@ -1,22 +1,12 @@
-package smart.orders;
+package smart.commodity;
 
-import earth.server.user.Signin;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 import smart.server.DataService;
-import smart.utils.data.SmartUsersEntity;
 
-import java.util.List;
+public class GoodInfo {
 
-public class OrderCreate {
-
-    public static void calcCommidityValue(){
-
-    }
-
-    public static String commitCreate(Long uid, String commodities, ) {
-
+    public String createGoods(double value, int stock, String name, String pic){
         Session session = null;
         Transaction tx = null;
 
@@ -37,5 +27,10 @@ public class OrderCreate {
         }
 
         return "{'order':'"+ode.getSess()+"','code':1000}";
+    }
+
+    public static String findGoodInfo(Long uid, String commodities, ) {
+
+
     }
 }

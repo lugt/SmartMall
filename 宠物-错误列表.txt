@@ -1,22 +1,26 @@
 -1010 No Param
--1011 "?"ȱ��
+-1011 "?"缺少
 -1012 Login-Exception 
--1014 Exception - ��ʽ����
--1015 ���벻����
--2001 -2006 ����������û� 
--2003 -2007 ���벻��ȷ
--2004 -2008 �޷��������� - Digest���⡢
--2005 -2009 �޷������¼��Ϣ
--2010 token ʧЧ
--2011 token Ϊ��
+-1014 Exception - 格式问题
+-1015 输入不完整
+-2001 -2006 不存在这个用户 
+-2003 -2007 密码不正确
+-2004 -2008 无法计算密码 - Digest问题、
+-2005 -2009 无法储存登录信息
+-2010 token 失效
+-2011 token 为空
 
-�û�����API
+-3001 无法储存派送信息 commit fail
+-3002 没有得到派送号码
+-3003 订单派送已存在
 
-�ڲ�ȷ���û���Ϣ
+用户操作API
+
+内部确认用户信息
 http://127.0.0.1:8015/api/user?action=oauth&token=ljSnbAvusICVgYkdc1b
 
-�û��ֻ��ŵ�¼
+用户手机号登录
 http://127.0.0.1:8015/api/user?action=quick&phone=13520583920&pass=123
 
-�û�ע��
+用户注册
 http://127.0.0.1:8015/api/user?action=reg&phone=13520583920&pass=123&name=Mingzi

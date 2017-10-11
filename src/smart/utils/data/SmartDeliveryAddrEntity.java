@@ -1,79 +1,120 @@
 package smart.utils.data;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "smart_delivery_addr", schema = "smartmall", catalog = "")
 public class SmartDeliveryAddrEntity {
-    private Serializable uid;
-    private Serializable addr1;
-    private Serializable addr2;
-    private Serializable addr3;
-    private Serializable addr4;
-    private Serializable addr5;
+    private int addrid;
+    private Integer uid;
+    private Integer mobile;
+    private Serializable addr;
+    private Serializable memo;
+    private Serializable recver;
+    private Integer type;
+    private Integer province;
+    private Integer district;
+    private Integer city;
+
+    @Id
+    @Column(name = "addrid", nullable = false)
+    public int getAddrid() {
+        return addrid;
+    }
+
+    public void setAddrid(int addrid) {
+        this.addrid = addrid;
+    }
 
     @Basic
-    @Column(name = "uid", nullable = false)
-    public Serializable getUid() {
+    @Column(name = "uid", nullable = true)
+    public Integer getUid() {
         return uid;
     }
 
-    public void setUid(Serializable uid) {
+    public void setUid(Integer uid) {
         this.uid = uid;
     }
 
     @Basic
-    @Column(name = "addr1", nullable = false, length = -1)
-    public Serializable getAddr1() {
-        return addr1;
+    @Column(name = "mobile", nullable = true)
+    public Integer getMobile() {
+        return mobile;
     }
 
-    public void setAddr1(Serializable addr1) {
-        this.addr1 = addr1;
-    }
-
-    @Basic
-    @Column(name = "addr2", nullable = false, length = -1)
-    public Serializable getAddr2() {
-        return addr2;
-    }
-
-    public void setAddr2(Serializable addr2) {
-        this.addr2 = addr2;
+    public void setMobile(Integer mobile) {
+        this.mobile = mobile;
     }
 
     @Basic
-    @Column(name = "addr3", nullable = false, length = -1)
-    public Serializable getAddr3() {
-        return addr3;
+    @Column(name = "addr", nullable = false, length = -1)
+    public Serializable getAddr() {
+        return addr;
     }
 
-    public void setAddr3(Serializable addr3) {
-        this.addr3 = addr3;
-    }
-
-    @Basic
-    @Column(name = "addr4", nullable = false, length = -1)
-    public Serializable getAddr4() {
-        return addr4;
-    }
-
-    public void setAddr4(Serializable addr4) {
-        this.addr4 = addr4;
+    public void setAddr(Serializable addr) {
+        this.addr = addr;
     }
 
     @Basic
-    @Column(name = "addr5", nullable = false, length = -1)
-    public Serializable getAddr5() {
-        return addr5;
+    @Column(name = "memo", nullable = true, length = -1)
+    public Serializable getMemo() {
+        return memo;
     }
 
-    public void setAddr5(Serializable addr5) {
-        this.addr5 = addr5;
+    public void setMemo(Serializable memo) {
+        this.memo = memo;
+    }
+
+    @Basic
+    @Column(name = "recver", nullable = true, length = -1)
+    public Serializable getRecver() {
+        return recver;
+    }
+
+    public void setRecver(Serializable recver) {
+        this.recver = recver;
+    }
+
+    @Basic
+    @Column(name = "type", nullable = true)
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    @Basic
+    @Column(name = "province", nullable = true)
+    public Integer getProvince() {
+        return province;
+    }
+
+    public void setProvince(Integer province) {
+        this.province = province;
+    }
+
+    @Basic
+    @Column(name = "district", nullable = true)
+    public Integer getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(Integer district) {
+        this.district = district;
+    }
+
+    @Basic
+    @Column(name = "city", nullable = true)
+    public Integer getCity() {
+        return city;
+    }
+
+    public void setCity(Integer city) {
+        this.city = city;
     }
 
     @Override
@@ -83,24 +124,32 @@ public class SmartDeliveryAddrEntity {
 
         SmartDeliveryAddrEntity that = (SmartDeliveryAddrEntity) o;
 
+        if (addrid != that.addrid) return false;
         if (uid != null ? !uid.equals(that.uid) : that.uid != null) return false;
-        if (addr1 != null ? !addr1.equals(that.addr1) : that.addr1 != null) return false;
-        if (addr2 != null ? !addr2.equals(that.addr2) : that.addr2 != null) return false;
-        if (addr3 != null ? !addr3.equals(that.addr3) : that.addr3 != null) return false;
-        if (addr4 != null ? !addr4.equals(that.addr4) : that.addr4 != null) return false;
-        if (addr5 != null ? !addr5.equals(that.addr5) : that.addr5 != null) return false;
+        if (mobile != null ? !mobile.equals(that.mobile) : that.mobile != null) return false;
+        if (addr != null ? !addr.equals(that.addr) : that.addr != null) return false;
+        if (memo != null ? !memo.equals(that.memo) : that.memo != null) return false;
+        if (recver != null ? !recver.equals(that.recver) : that.recver != null) return false;
+        if (type != null ? !type.equals(that.type) : that.type != null) return false;
+        if (province != null ? !province.equals(that.province) : that.province != null) return false;
+        if (district != null ? !district.equals(that.district) : that.district != null) return false;
+        if (city != null ? !city.equals(that.city) : that.city != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = uid != null ? uid.hashCode() : 0;
-        result = 31 * result + (addr1 != null ? addr1.hashCode() : 0);
-        result = 31 * result + (addr2 != null ? addr2.hashCode() : 0);
-        result = 31 * result + (addr3 != null ? addr3.hashCode() : 0);
-        result = 31 * result + (addr4 != null ? addr4.hashCode() : 0);
-        result = 31 * result + (addr5 != null ? addr5.hashCode() : 0);
+        int result = addrid;
+        result = 31 * result + (uid != null ? uid.hashCode() : 0);
+        result = 31 * result + (mobile != null ? mobile.hashCode() : 0);
+        result = 31 * result + (addr != null ? addr.hashCode() : 0);
+        result = 31 * result + (memo != null ? memo.hashCode() : 0);
+        result = 31 * result + (recver != null ? recver.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (province != null ? province.hashCode() : 0);
+        result = 31 * result + (district != null ? district.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
         return result;
     }
 }

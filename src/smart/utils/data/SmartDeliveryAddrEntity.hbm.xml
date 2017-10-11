@@ -5,24 +5,35 @@
 <hibernate-mapping>
 
     <class name="smart.utils.data.SmartDeliveryAddrEntity" table="smart_delivery_addr" schema="smartmall">
-        <id name="uid">
-            <column name="uid" sql-type="int(9)"/>
-            <generator class="native" />
+        <id name="addrid">
+            <column name="addrid" sql-type="int(11)"/>
         </id>
-        <property name="addr1">
-            <column name="addr1" sql-type="tinytext"/>
+        <property name="uid">
+            <column name="uid" sql-type="int(9)" not-null="true"/>
         </property>
-        <property name="addr2">
-            <column name="addr2" sql-type="tinytext"/>
+        <property name="mobile">
+            <column name="mobile" sql-type="int(11)" not-null="true"/>
         </property>
-        <property name="addr3">
-            <column name="addr3" sql-type="tinytext"/>
+        <property name="addr">
+            <column name="addr" sql-type="tinytext"/>
         </property>
-        <property name="addr4">
-            <column name="addr4" sql-type="tinytext"/>
+        <property name="memo">
+            <column name="memo" sql-type="tinytext" not-null="true"/>
         </property>
-        <property name="addr5">
-            <column name="addr5" sql-type="tinytext"/>
+        <property name="recver">
+            <column name="recver" sql-type="tinytext" not-null="true"/>
+        </property>
+        <property name="type">
+            <column name="type" sql-type="int(5)" not-null="true"/>
+        </property>
+        <property name="province">
+            <column name="province" sql-type="int(2)" not-null="true"/>
+        </property>
+        <property name="district">
+            <column name="district" sql-type="int(2)" not-null="true"/>
+        </property>
+        <property name="city">
+            <column name="city" sql-type="int(2)" not-null="true"/>
         </property>
     </class>
 </hibernate-mapping>
