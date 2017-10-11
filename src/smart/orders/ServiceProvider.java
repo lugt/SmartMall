@@ -3,6 +3,7 @@ package smart.orders;
 import io.netty.buffer.ByteBuf;
 import org.json.JSONObject;
 import smart.server.IServiceProvider;
+import smart.server.ServiceRegistry;
 import smart.utils.data.HttpsUtil;
 import smart.utils.data.UrlEncode;
 
@@ -37,7 +38,7 @@ public class ServiceProvider implements IServiceProvider {
             Long uid = 0L;
             try {
                 String token = x.get("token");
-                String userInfo = HttpsUtil.basicHttpPost("");
+                String userInfo = HttpsUtil.basicHttpPost(ServiceRegistry.getUrl("users"),null);
                 JSONObject jsob = new JSONObject(userInfo);
                 jsob.getString("");
                 uid = jsob.getLong("uid");
@@ -51,12 +52,7 @@ public class ServiceProvider implements IServiceProvider {
                     String products = x.get("products");
                     Long addrNum = x.get("addr");
                     Long deliver = x.get("deliver"); // DeliverMethod
-                    OrderCreate.commitCreate();
-                    if(pass != null && cell > 0 && name != null && pass.length() > 0 && name.length() > 0) {
-                        return new UserReg().commitCreate(cell, pass, name);
-                    }else{
-                        return "{'msg': '请检查输入','code':-1015}";
-                    }
+                    OrderCreate.commitCreate(uid,commodities);
                 }catch (Exception e){
                     return "{'msg': '请检查输入','code':-1014}";
                 }

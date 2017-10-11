@@ -57,4 +57,8 @@ public class ServiceRegistry {
         }
         return 10000;
     }
+
+    public static String getUrl(String users) {
+        return "http://127.0.0.1:8015/api/users/create";
+    }
 }
