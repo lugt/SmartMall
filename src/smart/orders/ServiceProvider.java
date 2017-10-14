@@ -50,44 +50,16 @@ public class ServiceProvider implements IServiceProvider {
                 // commos -> orderid
                 try {
                     String products = x.get("products");
-                    Long addrNum = x.get("addr");
-                    Long deliver = x.get("deliver"); // DeliverMethod
-                    OrderCreate.commitCreate(uid,commodities);
+                    return OrderCreate.commitCreate(uid,products);
                 }catch (Exception e){
                     return "{'msg': '请检查输入','code':-1014}";
                 }
-            }else if("reg".equals(outer)){
+            }else if("find_uid".equals(outer)){
                 // 注册 ... -> uid
                 try {
-                    String phone = x.get("phone");
-                    Long cell = Long.parseLong(phone);
-                    String pass = x.get("pass");
-                    String name = x.get("name");
-                    if(pass != null && cell > 0 && name != null && pass.length() > 0 && name.length() > 0) {
-                        return new UserReg().commitCreate(cell, pass, name);
-                    }else{
-                        return "{'msg': '请检查输入','code':-1015}";
-                    }
+                    return OrderCreate.findUid(uid);
                 }catch (Exception e){
                     return "{'msg': '请检查输入','code':-1014}";
-                }
-
-            }else if("quick".equals(outer)) {
-                // 快速登录 usn/email/phone -> sess + uid;
-
-                try {
-                    String phone = x.get("phone");
-                    Long cell = 0L;
-                    try {
-                        cell = Long.parseLong(phone);
-                    }catch (Exception e){
-                        return "{'msg': '请输入手机号码','code':-1012}";
-                    }
-                    String pass = x.get("pass");
-                    return new UserLogin().commitLogin(cell,pass);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return "{'msg': '系统内部异常','code':-1012}";
                 }
             }
         }else{

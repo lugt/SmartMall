@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="smart.utils.data.SmartLocalDeliveryEntity" table="smart_local_delivery" schema="smartmall">
+        <id name="deliverid">
+            <column name="deliverid" sql-type="int(10)"/>
+        </id>
+        <property name="orderid">
+            <column name="orderid" sql-type="int(10)" not-null="true"/>
+        </property>
+        <property name="uid">
+            <column name="uid" sql-type="int(10)"/>
+        </property>
+        <property name="type">
+            <column name="type" sql-type="int(5)" not-null="true"/>
+        </property>
+        <property name="status">
+            <column name="status" sql-type="int(5)" not-null="true"/>
+        </property>
+        <property name="sender">
+            <column name="sender" sql-type="text" not-null="true"/>
+        </property>
+        <property name="address">
+            <column name="address" sql-type="int(10)" not-null="true"/>
+        </property>
+        <property name="carrier">
+            <column name="carrier" sql-type="text" not-null="true"/>
+        </property>
+        <property name="starttime">
+            <column name="starttime" sql-type="int(10)" not-null="true"/>
+        </property>
+        <property name="reservetime">
+            <column name="reservetime" sql-type="int(10)" not-null="true"/>
+        </property>
+        <property name="packagetime">
+            <column name="packagetime" sql-type="int(10)" not-null="true"/>
+        </property>
+        <property name="accepttime">
+            <column name="accepttime" sql-type="int(10)" not-null="true"/>
+        </property>
+        <property name="confirmtime">
+            <column name="confirmtime" sql-type="int(10)" not-null="true"/>
+        </property>
+        <property name="logs">
+            <column name="logs" sql-type="text" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

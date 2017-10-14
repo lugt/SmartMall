@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="smart.utils.data.SmartUserAddrsEntity" table="smart_user_addrs" schema="smartmall">
+        <id name="uid">
+            <column name="uid" sql-type="int(11)"/>
+        </id>
+        <property name="addr1">
+            <column name="addr1" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="addr2">
+            <column name="addr2" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="addr3">
+            <column name="addr3" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="addr4">
+            <column name="addr4" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="addr5">
+            <column name="addr5" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="addr6">
+            <column name="addr6" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="addr7">
+            <column name="addr7" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="addr8">
+            <column name="addr8" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="addr9">
+            <column name="addr9" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="defaultaddr">
+            <column name="defaultaddr" sql-type="int(1)" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -49,11 +49,29 @@ public class ServiceProvider implements IServiceProvider {
                     int ordId = Integer.valueOf(x.get("order"));
                     int addrId = Integer.valueOf(x.get("addr")); // DeliverMethod
                     int rsvTime = Integer.valueOf(x.get("rsvtime")); // DeliverMethod
-                    new DeliveryCreate().commitCreate(ordId,addrId,uid,rsvTime);
+                    return new DeliveryCreate().commitCreate(ordId, addrId, uid, rsvTime);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return "";
+                    return "{'msg':'创建操作出现异常','code':-3007}";
                 }
+            }else if ("get_by_order".equals(outer)) {
+                try {
+                    int ordId = Integer.valueOf(x.get("order"));
+                    return new DeliveryCreate().findDeliveryInfo(ordId);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "{'msg':'创建操作出现异常','code':-3007}";
+                }
+            }else if ("get_by_id".equals(outer)) {
+                try {
+                    int devId = Integer.valueOf(x.get("id"));
+                    return new DeliveryCreate().findDeliveryInfoByDeliveryId(devId);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "{'msg':'创建操作出现异常','code':-3007}";
+                }
+            }else{
+                return "{'msg':'没有选择操作','code':-3006}";
             }
         }
 
