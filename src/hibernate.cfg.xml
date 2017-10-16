@@ -28,6 +28,8 @@
         <mapping resource="smart/utils/data/SmartGoodsEntity.hbm.xml"/>
         <mapping class="smart.utils.data.SmartUserAddrsEntity"/>
         <mapping resource="smart/utils/data/SmartUserAddrsEntity.hbm.xml"/>
+        <mapping resource="smart/utils/data/SmartOrderEntity.hbm.xml"/>
+        <mapping class="smart.utils.data.SmartOrderEntity"/>
 
         <!-- DB schema will be updated if needed -->
 
