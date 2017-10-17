@@ -7,26 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/smart/delivery/AddressControl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/matrice/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/out/production/matrice/hibernate.cfg.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/src/hibernate.cfg.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/smart/commodity/GoodInfo.java" afterPath="$PROJECT_DIR$/src/smart/commodity/GoodInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/smart/commodity/ServiceProvider.java" afterPath="$PROJECT_DIR$/src/smart/commodity/ServiceProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/smart/delivery/DeliveryCreate.java" afterPath="$PROJECT_DIR$/src/smart/delivery/DeliveryCreate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/smart/delivery/ServiceProvider.java" afterPath="$PROJECT_DIR$/src/smart/delivery/ServiceProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/smart/orders/OrderCreate.java" afterPath="$PROJECT_DIR$/src/smart/orders/OrderCreate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/smart/orders/ServiceProvider.java" afterPath="$PROJECT_DIR$/src/smart/orders/ServiceProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/smart/payment/ServiceProvider.java" afterPath="$PROJECT_DIR$/src/smart/payment/ServiceProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/smart/proxy/ServiceProvider.java" afterPath="$PROJECT_DIR$/src/smart/proxy/ServiceProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/smart/server/Entry.java" afterPath="$PROJECT_DIR$/src/smart/server/Entry.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/smart/server/ServiceRegistry.java" afterPath="$PROJECT_DIR$/src/smart/server/ServiceRegistry.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/smart/users/LoginCache.java" afterPath="$PROJECT_DIR$/src/smart/users/LoginCache.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/smart/users/ServiceProvider.java" afterPath="$PROJECT_DIR$/src/smart/users/ServiceProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/smart/users/UserInfo.java" afterPath="$PROJECT_DIR$/src/smart/users/UserInfo.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/smart/users/UserLogin.java" afterPath="$PROJECT_DIR$/src/smart/users/UserLogin.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/smart/users/UserReg.java" afterPath="$PROJECT_DIR$/src/smart/users/UserReg.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/宠物-错误列表.txt" afterPath="$PROJECT_DIR$/宠物-错误列表.txt" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -123,12 +104,74 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="宠物-错误列表.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="宠物-错误列表.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/宠物-错误列表.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-179">
-              <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+            <state relative-caret-position="-309">
+              <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Entry.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/smart/server/Entry.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="66" column="37" lean-forward="true" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NanshanHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/earth/server/sz/NanshanHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="258">
+              <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServiceProvider.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/smart/commodity/ServiceProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="137">
+              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServiceProvider.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/smart/users/ServiceProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="72" column="47" lean-forward="false" selection-start-line="72" selection-start-column="47" selection-end-line="72" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserLogin.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/smart/users/UserLogin.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EmptyByteBuf.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/Libs/netty-all-4.1.7.Final.jar!/io/netty/buffer/EmptyByteBuf.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="137">
+              <caret line="764" column="0" lean-forward="false" selection-start-line="764" selection-start-column="0" selection-end-line="764" selection-end-column="0" />
+              <folding>
+                <element signature="e#18940#18941#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -258,11 +301,11 @@
         <option value="$PROJECT_DIR$/宠物-错误列表.txt" />
         <option value="$PROJECT_DIR$/src/smart/users/UserInfo.java" />
         <option value="$PROJECT_DIR$/src/smart/users/UserReg.java" />
-        <option value="$PROJECT_DIR$/src/smart/users/UserLogin.java" />
         <option value="$PROJECT_DIR$/src/smart/orders/OrderCreate.java" />
         <option value="$PROJECT_DIR$/src/smart/delivery/DeliveryCreate.java" />
         <option value="$PROJECT_DIR$/src/smart/commodity/GoodInfo.java" />
         <option value="$PROJECT_DIR$/src/smart/commodity/ServiceProvider.java" />
+        <option value="$PROJECT_DIR$/src/smart/users/UserLogin.java" />
       </list>
     </option>
   </component>
@@ -1065,12 +1108,12 @@
       <workItem from="1507970889478" duration="12882000" />
       <workItem from="1508155536348" duration="2895000" />
       <workItem from="1508170121761" duration="5277000" />
-      <workItem from="1508211354851" duration="22142000" />
+      <workItem from="1508211354851" duration="23856000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="603600000" />
+    <option name="totallyTimeSpent" value="605314000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1083,6 +1126,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1698" height="1018" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3251462" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1094,7 +1138,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24938424" sideWeight="0.48371336" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24938424" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.48187134" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.48187134" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31578946" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36725146" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1289,11 +1333,29 @@
           <properties />
           <option name="timeStamp" value="388" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/smart/server/Entry.java</url>
+          <line>60</line>
+          <properties />
+          <option name="timeStamp" value="412" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/smart/users/UserLogin.java</url>
+          <line>47</line>
+          <properties />
+          <option name="timeStamp" value="413" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/smart/users/UserLogin.java</url>
+          <line>44</line>
+          <properties />
+          <option name="timeStamp" value="414" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="411" />
+      <option name="time" value="415" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -1306,7 +1368,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/earth/server/friend/FriendExecutor.java" />
     <entry file="file://$PROJECT_DIR$/src/earth/server/utils/ProtocolUtil.java" />
     <entry file="file://$PROJECT_DIR$/src/earth/server/user/CharacterDao.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1430,13 +1491,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/earth/server/sz/NanshanHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1248">
-          <caret line="57" column="31" lean-forward="false" selection-start-line="57" selection-start-column="31" selection-end-line="57" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://table:/888aa41c/aa68e1eb-60ed-4df4-bab2-9da98199dd8e/smartmall.smart_user_addrs">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1514,14 +1568,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="274">
           <caret line="83" column="22" lean-forward="false" selection-start-line="83" selection-start-column="22" selection-end-line="83" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/smart/users/ServiceProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="744">
-          <caret line="69" column="32" lean-forward="false" selection-start-line="69" selection-start-column="32" selection-end-line="69" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1614,22 +1660,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/smart/server/Entry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/smart/users/UserLogin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-255">
-          <caret line="30" column="41" lean-forward="true" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/smart/orders/ServiceProvider.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="265">
@@ -1637,14 +1667,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/smart/server/IServiceProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="4" column="35" lean-forward="true" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1656,18 +1678,68 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/smart/commodity/ServiceProvider.java">
+    <entry file="file://$PROJECT_DIR$/宠物-错误列表.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="88" column="18" lean-forward="true" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="18" />
+        <state relative-caret-position="-309">
+          <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/宠物-错误列表.txt">
+    <entry file="jar://$PROJECT_DIR$/Libs/netty-all-4.1.7.Final.jar!/io/netty/buffer/EmptyByteBuf.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-179">
-          <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+        <state relative-caret-position="137">
+          <caret line="764" column="0" lean-forward="false" selection-start-line="764" selection-start-column="0" selection-end-line="764" selection-end-column="0" />
+          <folding>
+            <element signature="e#18940#18941#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/smart/users/ServiceProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="72" column="47" lean-forward="false" selection-start-line="72" selection-start-column="47" selection-end-line="72" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/smart/server/IServiceProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="5" column="20" lean-forward="false" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/smart/commodity/ServiceProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/earth/server/sz/NanshanHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/smart/users/UserLogin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/smart/server/Entry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="66" column="37" lean-forward="true" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
           <folding />
         </state>
       </provider>

@@ -49,7 +49,6 @@ public class UserLogin {
         q.setParameter("cell", cell);
         SmartUsersEntity udE = (SmartUsersEntity) q.uniqueResult();
 
-
         if (udE == null || udE.getUid() <= Constant.MINIMAL_ETID) {
             tx.commit();
             return "{\"msg\": \"不存在这个用户\",\"code\":-2001}";
