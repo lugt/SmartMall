@@ -139,7 +139,7 @@ public class UserInfo {
             }
             return udE;
         } catch (Exception es) {
-            Monitor.logger("[GetEtid]" + es.getMessage());
+            Monitor.logger("[Get-Etd]" + es.getMessage());
             es.printStackTrace();
             return null;
         }

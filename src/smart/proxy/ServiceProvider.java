@@ -15,12 +15,12 @@ public class ServiceProvider implements IServiceProvider {
 
     public String execute(String url, String data){
         if(url == null){
-            return "{'msg':'没有URL','code':-1004}";
+            return "{\"msg\":\"没有URL\",\"code\":-1004}";
         }
         String[] x = url.split(","); // Cell,
         if(x.length < 1){
-            return "{'msg':'参数不正确','code':-1003}";
+            return "{\"msg\":\"参数不正确\",\"code\":-1003}";
         }
-        return "{'msg':'没有信息','code':-1002}";
+        return "{\"msg\":\"没有信息\",\"code\":-1002}";
     }
 }

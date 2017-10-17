@@ -48,7 +48,7 @@ public class UserReg {
             Query q = session.createQuery("from SmartUsersEntity where phone = :cell");
             q.setParameter("cell", cellphone);
             if(q.uniqueResult() != null){
-                return "{'msg': '手机号码已存在','code':-1016}";
+                return "{\"msg\": \"手机号码已存在\",\"code\":-1016}";
             }
 
             passWd = Signin.PasswordDigest(udE.getUid(), passWd);
@@ -56,12 +56,11 @@ public class UserReg {
             udE.setSess(generateSessionId());
             session.save(udE);
             tx.commit();
-
         } catch (Exception e) {
             Long k = System.currentTimeMillis();
             e.printStackTrace();
             log.error("Commit Fail/ Digest Fail -" + e.getLocalizedMessage()+k.toString());
-            return "{'msg': '无法保存用户信息','code':-1017,'timestamp':'"+k+"'}";
+            return "{\"msg\": \"无法保存用户信息\",\"code\":-1017,'timestamp':'"+k+"'}";
         }
 
         try {
@@ -71,10 +70,10 @@ public class UserReg {
             log.info("[Reg/f] Error Id:" + k.toString());
             e.printStackTrace();
             session.delete(udE);
-            return "{'msg': '无法保存用户附加信息','code':-1018,'timestamp':'"+k+"'}";
+            return "{\"msg\": \"无法保存用户附加信息\",\"code\":-1018,'timestamp':'"+k+"'}";
         }
 
-        return "{'token':'"+udE.getSess()+"','code':1000}";
+        return "{\"token\":\""+udE.getSess()+"\",\"code\":1000}";
         //session.saveDuration( new UserDao( "A follow up event", new Date() ) );
         //session.getTransaction().commit();
     }

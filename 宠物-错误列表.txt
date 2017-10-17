@@ -1,3 +1,5 @@
+任何操作：1000成功
+
 -1010 No Param
 -1011 "?"缺少
 -1012 Login-Exception 
@@ -32,14 +34,61 @@
 -6007 没有查询到订单
 -6010 没有得到订
 -6012 操作创建相关内容失败
+-6014 没有选择商品
+-6015 无法计算商品价格
+-6020 内部操作创建配送失败
+-6022 内部操作创建支付失败
+-6024 未知的配送方式
+-6025 未知的支付方式
+
 
 用户操作API
 
 内部确认用户信息
-http://127.0.0.1:8015/api/user?action=oauth&token=ljSnbAvusICVgYkdc1b
+http://127.0.0.1/api/users?action=oauth&token=ljSnbAvusICVgYkdc1b
 
 用户手机号登录
-http://127.0.0.1:8015/api/user?action=quick&phone=13520583920&pass=123
+http://127.0.0.1/api/users?action=quick&phone=13520583920&pass=123
 
 用户注册
-http://127.0.0.1:8015/api/user?action=reg&phone=13520583920&pass=123&name=Mingzi
+http://127.0.0.1/api/users?action=reg&phone=13520583920&pass=123&name=Mingzi
+
+
+------------------- 下列操作都需要url中配合 token=xxxxxxxxxxxxxxxx 存在
+
+
+查询置顶商品列表
+http://127.0.0.1/api/commodity?action=list_top&len=100
+
+查询指定的类目下的商品列表
+http://127.0.0.1/api/commodity?action=list_&len=100
+
+查询商品详情（详情页）
+http://127.0.0.1/api/commodity?action=find_good&commodity=1001
+
+订单下单（）
+http://127.0.0.1/api/orders?action=create&products={JSON}&payment=2&delivery=2&addr=3
+
+
+订单查询（UID）
+http://127.0.0.1/api/orders?action=list
+
+
+创建配送信息（主要是后台使用）
+http://127.0.0.1/api/delivery?action=create&order=2001&addr=3&rsvtime=1502020315
+
+
+配送信息查詢（订单)
+http://127.0.0.1/api/delivery?action=get_by_order&id=2001
+
+
+配送信息查询(配送ID)
+http://127.0.0.1/api/delivery?action=get_by_id&id=1001
+
+
+用户配送地址列表
+http://127.0.0.1/api/delivery?action=address_list
+
+
+用户配送地址设置
+http://127.0.0.1/api/delivery?action=address_set

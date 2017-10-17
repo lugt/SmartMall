@@ -55,14 +55,14 @@ public class GoodInfo {
             int goodid = como.getGoodid();
             tx.commit();
             if(goodid <= 0){
-                return "{'msg': '没有得到商品号码','code':-4007}";
+                return "{\"msg\": \"没有得到商品号码\",\"code\":-4007}";
             }
-            return "{'commodity':"+goodid+",'code':1000}";
+            return "{\"commodity\":"+goodid+",\"code\":1000}"; // Mathematical
         } catch (Exception e) {
             Long k = System.currentTimeMillis();
             e.printStackTrace();
             Monitor.logger("[Commit Fail] ID:" + k.toString() + " / " + e.getMessage());
-            return "{'msg': '无法储存商品信息','code':-4008}";
+            return "{\"msg\": \"无法储存商品信息\",\"code\":-4008}";
         }
     }
 
@@ -74,7 +74,7 @@ public class GoodInfo {
             q.setParameter("dd",goodid);
             List a = q.list();
             if(a == null || a.size() <= 0){
-                return "{'msg': '该商品不存在','code':-4003}";
+                return "{\"msg\": \"该商品不存在\",\"code\":-4003}";
             }
             SmartGoodsEntity sme = (SmartGoodsEntity) a.get(0);
             return formatGoodInfo(sme);
@@ -82,7 +82,7 @@ public class GoodInfo {
             Long k = System.currentTimeMillis();
             e.printStackTrace();
             Monitor.logger("[Search Fail] ID:" + k.toString() + " / " + e.getMessage());
-            return "{'msg': '无法找寻商品信息','code':-4004}";
+            return "{\"msg\": \"无法找寻商品信息\",\"code\":-4004}";
         }
     }
 
@@ -105,7 +105,7 @@ public class GoodInfo {
         jsw.put("goodsno",sme.getGoodsNo());
         jsw.put("img",sme.getImg());
         jsw.put("isdel",sme.getIsDel());
-        jsw.put("putwords",sme.getKeywords());
+        jsw.put("keywords",sme.getKeywords());
         jsw.put("listimg",sme.getListImg());
         jsw.put("marketprice",sme.getMarketPrice());
         jsw.put("modelid",sme.getModelId());
@@ -132,7 +132,7 @@ public class GoodInfo {
             q.setParameter("dd",category);
             List a = q.list();
             if(a == null || a.size() <= 0){
-                return "{'msg': '没有该类目商品','code':-4005}";
+                return "{\"msg\": \"没有该类目商品\",\"code\":-4005}";
             }
             JSONStringer jsg = new JSONStringer();
             JSONWriter jsw = jsg.array();
@@ -147,7 +147,7 @@ public class GoodInfo {
             Long k = System.currentTimeMillis();
             e.printStackTrace();
             Monitor.logger("[Search Fail] ID:" + k.toString() + " / " + e.getMessage());
-            return "{'msg': '无法找寻商品','code':-4004}";
+            return "{\"msg\": \"无法找寻商品\",\"code\":-4004}";
         }
     }
 
@@ -159,7 +159,7 @@ public class GoodInfo {
             q.setMaxResults(len);
             List a = q.list();
             if(a == null || a.size() <= 0){
-                return "{'msg': '没有该类目商品','code':-4005}";
+                return "{\"msg\": \"没有该类目商品\",\"code\":-4005}";
             }
             JSONStringer jsg = new JSONStringer();
             JSONWriter jsw = jsg.array();
@@ -174,7 +174,7 @@ public class GoodInfo {
             Long k = System.currentTimeMillis();
             e.printStackTrace();
             Monitor.logger("[Search Fail] ID:" + k.toString() + " / " + e.getMessage());
-            return "{'msg': '无法找寻商品','code':-4004}";
+            return "{\"msg\": \"无法找寻商品\",\"code\":-4004}";
         }
     }
 }

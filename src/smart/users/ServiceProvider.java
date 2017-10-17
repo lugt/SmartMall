@@ -17,10 +17,10 @@ public class ServiceProvider implements IServiceProvider {
 
     public String execute(String url, String data){
         if(url == null){
-            return "{'msg':'没有URL','code':-1004}";
+            return "{\"msg\":\"没有URL\",\"code\":-1004}";
         }
         if(!url.contains("?")) {
-            return "{'msg':'没有传入参数','code':-1011}";
+            return "{\"msg\":\"没有传入参数\",\"code\":-1011}";
         }
         String outer = url.substring(url.indexOf("?") + 1);
         Map<String, String> x = UrlEncode.getUrlParams(outer);
@@ -36,11 +36,11 @@ public class ServiceProvider implements IServiceProvider {
                 try {
                     String token = x.get("token");
                     if(token == null || token.length() == 0){
-                        return "{'msg': 'Token不完整','code':-2011}";
+                        return "{\"msg\": \"Token不完整\",\"code\":-2011}";
                     }
                     return LoginCache.getUserInfo(token);
                 }catch (Exception e){
-                    return "{'msg': '请检查输入','code':-1015}";
+                    return "{\"msg\": \"请检查输入\",\"code\":-1015}";
                 }
             }else if("reg".equals(outer)){
                 // 注册 ... -> uid
@@ -52,10 +52,10 @@ public class ServiceProvider implements IServiceProvider {
                     if(pass != null && cell > 0 && name != null && pass.length() > 0 && name.length() > 0) {
                         return new UserReg().commitCreate(cell, pass, name);
                     }else{
-                        return "{'msg': '请检查输入','code':-1015}";
+                        return "{\"msg\": \"请检查输入\",\"code\":-1015}";
                     }
                 }catch (Exception e){
-                    return "{'msg': '请检查输入','code':-1014}";
+                    return "{\"msg\": \"请检查输入\",\"code\":-1014}";
                 }
 
             }else if("quick".equals(outer)) {
@@ -67,19 +67,19 @@ public class ServiceProvider implements IServiceProvider {
                     try {
                         cell = Long.parseLong(phone);
                     }catch (Exception e){
-                        return "{'msg': '请输入手机号码','code':-1012}";
+                        return "{\"msg\": \"请输入手机号码\",\"code\":-1012}";
                     }
                     String pass = x.get("pass");
                     return new UserLogin().commitLogin(cell,pass);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return "{'msg': '系统内部异常','code':-1012}";
+                    return "{\"msg\": \"系统内部异常\",\"code\":-1012}";
                 }
             }
         }else{
-            return "{'msg':'没有Action','code':-1010}";
+            return "{\"msg\":\"没有Action\",\"code\":-1010}";
         }
 
-        return "{'msg':'没有信息','code':-1002}";
+        return "{\"msg\":\"没有信息\",\"code\":-1002}";
     }
 }

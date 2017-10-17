@@ -10,6 +10,9 @@
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection_provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
 
+        <property name="connection.username">smartmall</property>
+        <property name="connection.password">smartmall</property>
+
         <property name="c3p0.minPoolSize">3</property>
         <property name="c3p0.maxPoolSize">5</property>
         <property name="c3p0.acquireIncrement">1</property>

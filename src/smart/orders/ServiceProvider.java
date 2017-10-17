@@ -7,7 +7,6 @@ import smart.server.ServiceRegistry;
 import smart.utils.data.HttpsUtil;
 import smart.utils.data.UrlEncode;
 
-import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.Map;
 
@@ -19,10 +18,10 @@ public class ServiceProvider implements IServiceProvider {
 
     public String execute(String url, String data){
         if(url == null){
-            return "{'msg':'没有URL','code':-1004}";
+            return "{\"msg\":\"没有URL\",\"code\":-1004}";
         }
         if(!url.contains("?")) {
-            return "{'msg':'没有传入参数','code':-1011}";
+            return "{\"msg\":\"没有传入参数\",\"code\":-1011}";
         }
         String outer = url.substring(url.indexOf("?") + 1);
         Map<String, String> x = UrlEncode.getUrlParams(outer);
@@ -43,29 +42,32 @@ public class ServiceProvider implements IServiceProvider {
                 jsob.getString("");
                 uid = jsob.getLong("uid");
             }catch (Exception e){
-                return "{'msg': '登录信息无法验证','code':-1015}";
+                return "{\"msg\": \"登录信息无法验证\",\"code\":-1015}";
             }
 
             if("create".equals(outer)){
                 // commos -> orderid
                 try {
                     String products = x.get("products");
-                    return OrderCreate.commitCreate(uid,products);
+                    int payment = Integer.valueOf(x.get("payment"));
+                    int delivery = Integer.valueOf(x.get("delivery"));
+                    int addr = Integer.valueOf(x.get("addr"));
+                    return OrderCreate.pasrseCreate(Math.toIntExact(uid),products,payment,delivery,addr);
                 }catch (Exception e){
-                    return "{'msg': '请检查输入','code':-1014}";
+                    return "{\"msg\": \"请检查输入\",\"code\":-1014}";
                 }
             }else if("find_uid".equals(outer)){
                 // 注册 ... -> uid
                 try {
-                    return OrderCreate.findUid(uid);
+                    return OrderCreate.findUid(Math.toIntExact(uid),100);
                 }catch (Exception e){
-                    return "{'msg': '请检查输入','code':-1014}";
+                    return "{\"msg\": \"请检查输入\",\"code\":-1014}";
                 }
             }
         }else{
-            return "{'msg':'没有Action','code':-1010}";
+            return "{\"msg\":\"没有Action\",\"code\":-1010}";
         }
 
-        return "{'msg':'没有信息','code':-1002}";
+        return "{\"msg\":\"没有信息\",\"code\":-1002}";
     }
 }

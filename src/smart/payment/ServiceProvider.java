@@ -13,9 +13,9 @@ public class ServiceProvider implements IServiceProvider {
 
     public String execute(String url, String data){
         if(url == null){
-            return "{'msg':'没有URL','code':-1004}";
+            return "{\"msg\":\"没有URL\",\"code\":-1004}";
         }
 
-        return "{'msg':'没有信息','code':-1002}";
+        return "{\"msg\":\"没有信息\",\"code\":-1002}";
     }
 }

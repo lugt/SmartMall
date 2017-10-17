@@ -11,9 +11,11 @@ public class LoginCache {
     public static String getUserInfo(String token) {
         if(currentUsers.containsKey(token)) {
             SmartUsersEntity sme = currentUsers.get(token);
-            return "{'code':1000,'uid':"+sme.getUid()+",'name':'"+sme.getName()+"','priv':'"+sme.getPriv()+"','phone':'"+sme.getPhone()+"'}";
+            return "{\"code\":1000,\"uid\":"+sme.getUid()+
+                    ",\"name\":\""+sme.getName()+"\",\"priv\":\""+sme.getPriv()+
+                    "\",\"phone\":\""+sme.getPhone()+"\"}";
         }else{
-            return "{'code':-2010,'msg':'token失效'}";
+            return "{\"msg\":\"token失效\",\"code\":-2010}";
         }
     }
 }

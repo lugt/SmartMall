@@ -9,17 +9,17 @@ public class ServiceRegistry {
     public String get(String service){
         String url = "http://127.0.0.1/api/none";
         if(service.startsWith("-service")) {
-            url = PSSREFIX + ":8014/service";
+            url = PSSREFIX + ":8014/api/service";
         }else if(service.startsWith("-users")) {
-            url = PSSREFIX + ":8015/users";
+            url = PSSREFIX + ":8015/api/users";
         }else if(service.startsWith("-orders")) {
-            url = PSSREFIX + ":8016/orders";
+            url = PSSREFIX + ":8016/api/orders";
         }else if(service.startsWith("-payment")) {
-            url = PSSREFIX + ":8017/payment";
+            url = PSSREFIX + ":8017/api/payment";
         }else if(service.startsWith("-delivery")) {
-            url = PSSREFIX + ":8018/delivery";
+            url = PSSREFIX + ":8018/api/delivery";
         }else if(service.startsWith("-commodity")) {
-            url = PSSREFIX + ":8019/commodity";
+            url = PSSREFIX + ":8019/api/commodity";
         }
         return url;
     }
@@ -58,7 +58,7 @@ public class ServiceRegistry {
         return 10000;
     }
 
-    public static String getUrl(String users) {
-        return "http://127.0.0.1:8015/api/users/create";
+    public static String getUrl(String model) {
+        return "http://127.0.0.1:8015/api/"+model+"/go.php";
     }
 }

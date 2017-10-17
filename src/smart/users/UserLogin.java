@@ -52,7 +52,7 @@ public class UserLogin {
 
         if (udE == null || udE.getUid() <= Constant.MINIMAL_ETID) {
             tx.commit();
-            return "{'msg': '不存在这个用户','code':-2001}";
+            return "{\"msg\": \"不存在这个用户\",\"code\":-2001}";
         }
 
         try {
@@ -62,20 +62,20 @@ public class UserLogin {
                 session.save(udE);
                 tx.commit();
                 LoginCache.currentUsers.put(sess,udE);
-                return "{'token':'"+udE.getSess()+"','code':1000,'uid':"+udE.getUid()+"}";
+                return "{\"token\":\""+udE.getSess()+"\",\"code\":1000,\"uid\":"+udE.getUid()+"}";
             } else {
                 tx.commit();
-                return "{'msg': '密码不正确','code':-2003}";
+                return "{\"msg\": \"密码不正确\",\"code\":-2003}";
             }
         } catch (Exception e) {
             if (e instanceof IllegalArgumentException || e instanceof IllegalStateException) {
                 Monitor.logger("[Digest Fail]" + e.getMessage() + e.getStackTrace().toString());
-                return "{'msg': '无法验证密码','code':-2004}";
+                return "{\"msg\": \"无法验证密码\",\"code\":-2004}";
             } else {
                 Long k = System.currentTimeMillis();
                 e.printStackTrace();
                 Monitor.logger("[Commit Fail] ID:" + k.toString() + " / " + e.getMessage());
-                return "{'msg': '无法储存登录信息','code':-2005}";
+                return "{\"msg\": \"无法储存登录信息\",\"code\":-2005}";
             }
         }
     }
@@ -90,28 +90,28 @@ public class UserLogin {
 
             if (udE == null || udE.getUid() <= Constant.MINIMAL_ETID) {
                 tx.commit();
-                return "{'msg': '不存在这个用户','code':-2006}";
+                return "{\"msg\": \"不存在这个用户\",\"code\":-2006}";
             }
             if (udE.getPss() != null && udE.getPss().equals(Signin.PasswordDigest(udE.getUid(), pass))) {
                 udE.setSess(generateSessionId());
                 session.save(udE);
                 tx.commit();
-                return "{'token':'"+udE.getSess()+"','code':1000,'uid':"+userId+"}";
+                return "{\"token\":\""+udE.getSess()+"\",\"code\":1000,\"uid\":"+userId+"}";
 
             } else {
                 tx.commit();
-                return "{'msg': '密码不正确','code':-2007}";
+                return "{\"msg\": \"密码不正确\",\"code\":-2007}";
             }
         } catch (Exception e) {
             Long k = System.currentTimeMillis();
             if (e instanceof IllegalArgumentException || e instanceof IllegalStateException) {
                 LoggerManager.i("[Login/Argu] ID:" + k.toString() + " - " + e.getMessage());
                 e.printStackTrace();
-                return "{'msg': '密码不正确','code':-2008}";
+                return "{\"msg\": \"密码不正确\",\"code\":-2008}";
             } else {
                 LoggerManager.i("[Login/Commit] ID:" + k.toString()  + " - " + e.getMessage());
                 e.printStackTrace();
-                return "{'msg': '密码不正确','code':-2009}";
+                return "{\"msg\": \"密码不正确\",\"code\":-2009}";
             }
         }
 

@@ -18,7 +18,7 @@ public class Entry {
 
         for(String arg:args) {
             isp.put(arg.substring(1),ServiceRegistry.getProvider(arg));
-            LoggerManager.i("----------Provider已经就绪----------");
+            LoggerManager.i("----------Provider已经就绪:"+arg+"----------");
         }
 
         try{
