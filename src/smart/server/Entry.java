@@ -58,18 +58,28 @@ public class Entry {
 
 
     public static String dispatch(String uri, ByteBuf content) {
-        if(uri.startsWith("/api/users")) {
-            return isp.get("users").distribute(uri, content);
-        }else if(uri.startsWith("/api/orders")) {
-            return isp.get("orders").distribute(uri, content);
-        }else if(uri.startsWith("/api/delivery")) {
-            return isp.get("delivery").distribute(uri, content);
-        }else if(uri.startsWith("/api/payment")) {
-            return isp.get("payment").distribute(uri, content);
-        }else if(uri.startsWith("/api/commodity")) {
-            return isp.get("commodity").distribute(uri, content);
-        }else{
-            return isp.get("service").distribute(uri, content);
+        try {
+            if (uri.startsWith("/api/users")) {
+                return (String)Class.forName("smart.users.ServiceProvider").getMethod("distribute", String.class, ByteBuf.class, int.class).invoke(null,uri,content,0);
+            } else if (uri.startsWith("/api/orders")) {
+                return (String)Class.forName("smart.orders.ServiceProvider").getMethod("distribute", String.class, ByteBuf.class, int.class).invoke(null,uri,content,0);
+            } else if (uri.startsWith("/api/delivery")) {
+                return (String)Class.forName("smart.delivery.ServiceProvider").getMethod("distribute", String.class, ByteBuf.class, int.class).invoke(null,uri,content,0);
+            } else if (uri.startsWith("/api/payment")) {
+                return (String)Class.forName("smart.payment.ServiceProvider").getMethod("distribute", String.class, ByteBuf.class, int.class).invoke(null,uri,content,0);
+            } else if (uri.startsWith("/api/commodity")) {
+                return (String) Class.forName("smart.commodity.ServiceProvider").getMethod("distribute", String.class, ByteBuf.class, int.class).invoke(null,uri,content,0);
+            } else {
+                return (String) Class.forName("smart.commodity.ServiceProvider").getMethod("distribute", String.class, ByteBuf.class, int.class).invoke(null,uri,content,0);
+                /*if(!isp.containsKey("service")){
+                    return "{\"msg\":处理中途错误\",\"code\":-810}";
+                }else {
+                    return isp.get("service").distribute(uri, content);
+                }*/
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return "{\"msg\":处理中途错误\",\"code\":-800}";
         }
     }
 }

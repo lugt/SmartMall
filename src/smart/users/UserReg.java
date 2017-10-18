@@ -30,7 +30,7 @@ public class UserReg {
         }
     }
 
-    public String commitCreate(long cellphone, String passWd, String dispName) {
+    public static String commitCreate(long cellphone, String passWd, String dispName) {
 
         SmartUsersEntity udE = new SmartUsersEntity();
         udE.setName(dispName);
@@ -78,11 +78,11 @@ public class UserReg {
         //session.getTransaction().commit();
     }
 
-    private String generateSessionId() {
+    private static String generateSessionId() {
         return ETID.GetETID();
     }
 
-    private void finishbasic(SmartUsersEntity udE, Session session) throws Exception {
+    private static void finishbasic(SmartUsersEntity udE, Session session) throws Exception {
         // ok
         // 创建地址记录表格
     }

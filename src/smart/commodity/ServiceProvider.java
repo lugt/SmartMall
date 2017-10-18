@@ -15,12 +15,17 @@ import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Map;
 
 public class ServiceProvider implements IServiceProvider {
+    public static String distribute(String q, ByteBuf byteBuf, int a) {
+        // get all bufs
+        return execute(q,byteBuf.toString(Charset.forName("UTF-8")));
+    }
+
     public String distribute(String q, ByteBuf byteBuf) {
         // get all bufs
         return execute(q,byteBuf.toString(Charset.forName("UTF-8")));
     }
 
-    public String execute(String url, String data){
+    public static String execute(String url, String data){
         if(url == null){
             return "{\"msg\":\"没有URL\",\"code\":-1004}";
         }

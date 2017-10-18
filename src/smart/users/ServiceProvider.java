@@ -15,7 +15,12 @@ public class ServiceProvider implements IServiceProvider {
         return execute(q,byteBuf.toString(Charset.forName("UTF-8")));
     }
 
-    public String execute(String url, String data){
+    public static String distribute(String q, ByteBuf byteBuf, int a) {
+        // get all bufs
+        return execute(q,byteBuf.toString(Charset.forName("UTF-8")));
+    }
+
+    public static String execute(String url, String data){
         if(url == null){
             return "{\"msg\":\"没有URL\",\"code\":-1004}";
         }
@@ -50,7 +55,7 @@ public class ServiceProvider implements IServiceProvider {
                     String pass = x.get("pass");
                     String name = x.get("name");
                     if(pass != null && cell > 0 && name != null && pass.length() > 0 && name.length() > 0) {
-                        return new UserReg().commitCreate(cell, pass, name);
+                        return UserReg.commitCreate(cell, pass, name);
                     }else{
                         return "{\"msg\": \"请检查输入\",\"code\":-1015}";
                     }
@@ -70,7 +75,7 @@ public class ServiceProvider implements IServiceProvider {
                         return "{\"msg\": \"请输入手机号码\",\"code\":-1012}";
                     }
                     String pass = x.get("pass");
-                    return new UserLogin().commitLogin(cell,pass);
+                    return UserLogin.commitLogin(cell,pass);
                 } catch (Exception e) {
                     e.printStackTrace();
                     return "{\"msg\": \"系统内部异常\",\"code\":-1012}";

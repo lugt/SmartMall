@@ -23,7 +23,7 @@ import java.nio.charset.Charset;
  */
 public class UserLogin {
 
-    public long getEtidOnSSid(String ssid) {
+    public static long getEtidOnSSid(String ssid) {
         try {
             Session session = DataService.getSession();
             Transaction tx = DataService.getTransact(session);
@@ -40,7 +40,7 @@ public class UserLogin {
         }
     }
 
-    public String commitLogin(Long cell, String passWd) throws Exception {
+    public static String commitLogin(Long cell, String passWd) throws Exception {
 
         Session session = DataService.getSession();
         Transaction tx = DataService.getTransact(session);
@@ -116,10 +116,12 @@ public class UserLogin {
 
     }
 
-    private String generateSessionId() {
+    private static String generateSessionId() {
         String result = null;
-        do {result = ETID.GetETID();//UUID.randomUUID().toString().replaceAll("-","") + System.currentTimeMillis()+"x";
+        do {
+            result = ETID.GetETID();//UUID.randomUUID().toString().replaceAll("-","") + System.currentTimeMillis()+"x";
         } while (getEtidOnSSid(result) != 0L); //此处保证最终生成给客户端使用的SESSIONID一定是不重复的
+
         return result;
     }
 
