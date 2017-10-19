@@ -59,7 +59,7 @@ public class NanshanHandler extends ChannelInboundHandlerAdapter {
             } else if (uri.equals("/")) {
                         res = "欢迎 - Welcome - Bienvenue";
             } else {
-                        res = "Exp,1001";
+                        res = "Exp,1001,"+ uri;
             }
 
             content.content().release();
