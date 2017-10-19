@@ -19,7 +19,7 @@ public class GoodInfo {
 
     public static String commitCreate(double value, double mkValue, int stock, String name, String pic, int brand, int model,String content,String description){
         try {
-            Session session = DataService.getSession();
+            Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
             SmartGoodsEntity como = new SmartGoodsEntity();
 
@@ -53,10 +53,10 @@ public class GoodInfo {
             session.save(como);
 
             int goodid = como.getGoodid();
-            tx.commit();
             if(goodid <= 0){
                 return "{\"msg\": \"没有得到商品号码\",\"code\":-4007}";
             }
+            DataService.finishUp(session,tx);
             return "{\"commodity\":"+goodid+",\"code\":1000}"; // Mathematical
         } catch (Exception e) {
             Long k = System.currentTimeMillis();
@@ -68,13 +68,12 @@ public class GoodInfo {
 
     public static String findGoodInfo(int goodid) {
         try {
-            Session session = DataService.getSession();
+            Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
             Query q = session.createQuery("from SmartGoodsEntity where goodid = :dd");
             q.setParameter("dd",goodid);
             List a = q.list();
-            tx.commit();
-            session.close();
+            DataService.finishUp(session,tx);
             if(a == null || a.size() <= 0){
                 return "{\"msg\": \"该商品不存在\",\"code\":-4003}";
             }
@@ -128,12 +127,12 @@ public class GoodInfo {
 
     public static String findGoodByCategory(int category, int len) {
         try {
-            Session session = DataService.getSession();
+            Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
             Query q = session.createQuery("from SmartGoodsEntity where modelId = :dd");
             q.setParameter("dd",category);
             List a = q.list();
-            tx.commit();
+            DataService.finishUp(session,tx);
             if(a == null || a.size() <= 0){
                 return "{\"msg\": \"没有该类目商品\",\"code\":-4005}";
             }
@@ -156,7 +155,7 @@ public class GoodInfo {
 
     public static String findTop(int len) {
         try {
-            Session session = DataService.getSession();
+            Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
             Query q = session.createQuery("from SmartGoodsEntity");
             q.setMaxResults(len);
@@ -164,6 +163,7 @@ public class GoodInfo {
             if(a == null || a.size() <= 0){
                 return "{\"msg\": \"没有该类目商品\",\"code\":-4005}";
             }
+            DataService.finishUp(session,tx);
             JSONStringer jsg = new JSONStringer();
             JSONWriter jsw = jsg.array();
             for(Object m : a){

@@ -19,7 +19,7 @@ public class InnerLogin {
 
     public long verify(Long target, String sess) {
         try {
-            Session session = DataService.getSession();
+            Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
             if(!session.isConnected() || !session.isOpen()){
                 return 0L;
@@ -27,7 +27,7 @@ public class InnerLogin {
             Query q = session.createQuery("from SmartUsersEntity where sess = :sess");
             q.setParameter("sess", sess);
             List l = q.list();
-            tx.commit();
+            DataService.finishUp(session,tx);
             if(l.get(0) instanceof SmartUsersEntity) {
                 SmartUsersEntity udE = (SmartUsersEntity) l.get(0);
                 return (target == udE.getUid()) ? udE.getUid() : 0L;
@@ -45,7 +45,7 @@ public class InnerLogin {
         try {
             if(s == null){ return 0L; }
             if(!Verifier.isValidH64(s)) return 0;
-            Session session = DataService.getSession();
+            Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
             DataService.getTransact(session);
             if(!session.isConnected() || !session.isOpen()){
@@ -54,7 +54,7 @@ public class InnerLogin {
             Query q = session.createQuery("from SmartUsersEntity where sess = :sess");
             q.setParameter("sess", s);
             List l = q.list();
-            tx.commit();
+            DataService.finishUp(session,tx);
             //UserdaoEntity udE = (UserdaoEntity) q.uniqueResult();
             if (l.size() == 0){
                 return 0L;

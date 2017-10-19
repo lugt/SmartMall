@@ -10,8 +10,6 @@ import org.hibernate.query.Query;
 import smart.server.DataService;
 import smart.utils.data.SmartUsersEntity;
 
-import java.nio.charset.Charset;
-
 /**
  * Created by Frapo on 2017/1/25.
  * Version :10
@@ -41,7 +39,7 @@ public class UserReg {
         Transaction tx = null;
         try {
 
-            session = DataService.getSession();
+            session = DataService.getSessionA();
             tx =  DataService.getTransact(session);
             // 检验是否存在
 
@@ -55,7 +53,7 @@ public class UserReg {
             udE.setPss(passWd);
             udE.setSess(generateSessionId());
             session.save(udE);
-            tx.commit();
+            DataService.finishUp(session,tx);
         } catch (Exception e) {
             Long k = System.currentTimeMillis();
             e.printStackTrace();

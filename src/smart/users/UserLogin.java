@@ -4,17 +4,12 @@ import earth.server.Constant;
 import earth.server.Monitor;
 import earth.server.user.ETID;
 import earth.server.user.Signin;
-import earth.server.utils.Verifier;
-import io.netty.buffer.ByteBuf;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import smart.server.DataService;
 import smart.utils.core.LoggerManager;
 import smart.utils.data.SmartUsersEntity;
-
-import javax.xml.crypto.Data;
-import java.nio.charset.Charset;
 
 /**
  * Created by Frapo on 2017/1/22.
@@ -25,12 +20,12 @@ public class UserLogin {
 
     public static long getEtidOnSSid(String ssid) {
         try {
-            Session session = DataService.getSession();
+            Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
             Query q = session.createQuery("from SmartUsersEntity where sess = :sess");
             q.setParameter("sess", ssid);
             SmartUsersEntity udE = (SmartUsersEntity) q.uniqueResult();
-            tx.commit();
+            DataService.finishUp(session,tx);
             if (udE == null) return 0L;
             return udE.getUid();
         } catch (Exception es) {
@@ -42,15 +37,16 @@ public class UserLogin {
 
     public static String commitLogin(Long cell, String passWd) throws Exception {
 
-        Session session = DataService.getSession();
+        Session session = DataService.getSessionA();
         Transaction tx = DataService.getTransact(session);
 
         Query q = session.createQuery("from SmartUsersEntity where phone = :cell");
         q.setParameter("cell", cell);
         SmartUsersEntity udE = (SmartUsersEntity) q.uniqueResult();
 
+
         if (udE == null || udE.getUid() <= Constant.MINIMAL_ETID) {
-            tx.commit();
+            DataService.finishUp(session,tx);
             return "{\"msg\": \"不存在这个用户\",\"code\":-2001}";
         }
 
@@ -59,11 +55,11 @@ public class UserLogin {
                 String sess = generateSessionId();
                 udE.setSess(sess);
                 session.save(udE);
-                tx.commit();
+                DataService.finishUp(session,tx);
                 LoginCache.currentUsers.put(sess,udE);
                 return "{\"token\":\""+udE.getSess()+"\",\"code\":1000,\"uid\":"+udE.getUid()+"}";
             } else {
-                tx.commit();
+                DataService.finishUp(session,tx);
                 return "{\"msg\": \"密码不正确\",\"code\":-2003}";
             }
         } catch (Exception e) {
@@ -81,24 +77,24 @@ public class UserLogin {
 
     private String commitLoginUid(Long userId, String pass) {
         try{
-            Session session = DataService.getSession();
+            Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
 
             Query q = session.createQuery("from SmartUsersEntity where uid = :ev").setParameter("ev", userId);
             SmartUsersEntity udE = (SmartUsersEntity) q.uniqueResult();
 
             if (udE == null || udE.getUid() <= Constant.MINIMAL_ETID) {
-                tx.commit();
+                DataService.finishUp(session,tx);
                 return "{\"msg\": \"不存在这个用户\",\"code\":-2006}";
             }
             if (udE.getPss() != null && udE.getPss().equals(Signin.PasswordDigest(udE.getUid(), pass))) {
                 udE.setSess(generateSessionId());
                 session.save(udE);
-                tx.commit();
+                DataService.finishUp(session,tx);
                 return "{\"token\":\""+udE.getSess()+"\",\"code\":1000,\"uid\":"+userId+"}";
 
             } else {
-                tx.commit();
+                DataService.finishUp(session,tx);
                 return "{\"msg\": \"密码不正确\",\"code\":-2007}";
             }
         } catch (Exception e) {

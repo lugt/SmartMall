@@ -78,19 +78,19 @@ public class OrderCreate{
 
     public static String commitCreate(int uid, SmartOrderEntity soe, int paymethod, int delivermethod, int deliveraddr) {
         try {
-            Session session = DataService.getSession();
+            Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
             session.save(soe);
             if(soe.getId() > 0){
                 //ok
-                tx.commit();
+                DataService.finishUp(session,tx);
                 int a = execute_create_order(soe,paymethod,delivermethod,deliveraddr);
                 if(a < 0){
                     return "{\"msg\": \"订单准备操作失败\",\"code\":"+a+"}";
                 }
                 return "{'order':"+soe.getId()+",'code':1000}";
             }else{
-                tx.commit();
+                DataService.finishUp(session,tx);
                 return "{\"msg\": \"没有得到订单号码\",\"code\":-6005}";
             }
         } catch (Exception e) {
@@ -135,13 +135,13 @@ public class OrderCreate{
 
     public static String findUid(int uid,int len) {
         try {
-            Session session = DataService.getSession();
+            Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
             Query q = session.createQuery("from SmartOrderEntity where userId = :uss");
             q.setParameter("uss",uid);
             q.setMaxResults(len);
             List x = q.list();
-            tx.commit();
+            DataService.finishUp(session,tx);
             if(x == null || x.size() < 1){
                 return "{\"msg\": \"没有得到订单\",\"code\":-6010}";
             }

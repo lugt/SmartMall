@@ -1,15 +1,11 @@
 package smart.delivery;
 
-import earth.server.Constant;
 import earth.server.Monitor;
-import earth.server.user.ETID;
-import earth.server.user.Signin;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.json.JSONStringer;
 import smart.server.DataService;
-import smart.utils.core.LoggerManager;
 import smart.utils.data.SmartLocalDeliveryEntity;
 
 import java.util.List;
@@ -24,12 +20,12 @@ public class DeliveryCreate {
     public String findDeliveryInfo(int orderId){
         Session session = null;
         try {
-            session = DataService.getSession();
+            session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
             Query q = session.createQuery("from SmartLocalDeliveryEntity where orderid = :ord");
             q.setParameter("ord",orderId);
             List a = q.list();
-            tx.commit();
+            DataService.finishUp(session,tx);
             if(a == null || a.size() <= 0){
                 return "{\"msg\": \"该订单的派送已存在\",\"code\":-3003}";
             }
@@ -67,12 +63,12 @@ public class DeliveryCreate {
 
     public String findDeliveryInfoByDeliveryId(int deliverId){
         try {
-            Session session = DataService.getSession();
+            Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
             Query q = session.createQuery("from SmartLocalDeliveryEntity where deliverid = :dd");
             q.setParameter("dd",deliverId);
             List a = q.list();
-            tx.commit();
+            DataService.finishUp(session,tx);
             if(a == null || a.size() <= 0){
                 return "{\"msg\": \"该订单的派送已存在\",\"code\":-3003}";
             }
@@ -89,7 +85,7 @@ public class DeliveryCreate {
     public String commitCreate(int orderId, int addrId, int uid,int rsvTime) throws Exception {
 
         try {
-            Session session = DataService.getSession();
+            Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
             SmartLocalDeliveryEntity slde = new SmartLocalDeliveryEntity();
             int now = Math.toIntExact(System.currentTimeMillis() / 1000);
@@ -106,7 +102,7 @@ public class DeliveryCreate {
             slde.setReservetime(rsvTime);
             session.save(slde);
             int dlvId = slde.getDeliverid();
-            tx.commit();
+            DataService.finishUp(session,tx);
             if(dlvId <= 0){
                 return "{\"msg\": \"没有得到派送号码\",\"code\":-3002}";
             }

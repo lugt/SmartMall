@@ -53,17 +53,16 @@ public class UserInfo {
 
     public SmartUsersEntity getUserOnSSid(String ssid) {
         try {
-            Session session = DataService.getSession();
+            Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
 
             Query q = session.createQuery("from SmartUsersEntity where sess = :sess");
             q.setParameter("sess", ssid);
             SmartUsersEntity udE = (SmartUsersEntity) q.uniqueResult();
+            DataService.finishUp(session,tx);
             if (udE == null) {
-                tx.commit();
                 return null;
             }
-            tx.commit();
             return udE;
         } catch (Exception es) {
             Monitor.logger("[GetEtid]" + es.getMessage());
@@ -111,12 +110,12 @@ public class UserInfo {
 
     private SmartUsersEntity getUserOnCell(Long et) {
         try {
-            Session session = DataService.getSession();
+            Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
             Query q = session.createQuery("from SmartUsersEntity where phone = :cell");
             q.setParameter("cell", et);
             SmartUsersEntity udE = (SmartUsersEntity) q.uniqueResult();
-            tx.commit();
+            DataService.finishUp(session,tx);
             if (udE == null) return null;
             return udE;
         } catch (Exception es) {
@@ -128,12 +127,12 @@ public class UserInfo {
 
     private SmartUsersEntity getUserOnEtid(long et) {
         try {
-            Session session = DataService.getSession();
+            Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
             Query q = session.createQuery("from SmartUsersEntity where uid = :eid");
             q.setParameter("eid", et);
             SmartUsersEntity udE = (SmartUsersEntity) q.uniqueResult();
-            tx.commit();
+            DataService.finishUp(session,tx);
             if (udE == null){
                 return null;
             }

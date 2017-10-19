@@ -2,7 +2,6 @@ package smart.server;
 
 
 import earth.server.Monitor;
-import smart.utils.core.LoggerManager;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import smart.utils.core.LoggerManager;
 
 /**
  * Created by Frapo on 2017/8/8.
@@ -42,7 +42,7 @@ public class DataService {
         }
     }
 
-    public static Session getSession() throws HibernateException{
+    public static Session getSessionA() throws HibernateException{
         Session session;
         if (sessionFactory == null) {
             setUp();
@@ -56,9 +56,16 @@ public class DataService {
             session = sessionFactory.openSession();
         }
         try {
-            session = sessionFactory.openSession();
+            session = sessionFactory.getCurrentSession();
+            if(!session.isConnected()){
+                session = sessionFactory.openSession();
+            }
         }catch (Exception e){
-            session =  sessionFactory.openSession();
+            try {
+                session = sessionFactory.openSession();
+            }catch (Exception es){
+                throw new HibernateException("Could not initiate session - -7X85");
+            }
         }
         return session;
     }
@@ -97,5 +104,10 @@ public class DataService {
                 return tr;
             }
         }
+    }
+
+    public static void finishUp(Session session, Transaction tx) {
+        tx.commit();
+        session.close();
     }
 }
