@@ -73,6 +73,8 @@ public class GoodInfo {
             Query q = session.createQuery("from SmartGoodsEntity where goodid = :dd");
             q.setParameter("dd",goodid);
             List a = q.list();
+            tx.commit();
+            session.close();
             if(a == null || a.size() <= 0){
                 return "{\"msg\": \"该商品不存在\",\"code\":-4003}";
             }
@@ -131,6 +133,7 @@ public class GoodInfo {
             Query q = session.createQuery("from SmartGoodsEntity where modelId = :dd");
             q.setParameter("dd",category);
             List a = q.list();
+            tx.commit();
             if(a == null || a.size() <= 0){
                 return "{\"msg\": \"没有该类目商品\",\"code\":-4005}";
             }

@@ -56,7 +56,7 @@ public class DataService {
             session = sessionFactory.openSession();
         }
         try {
-            session = sessionFactory.getCurrentSession();
+            session = sessionFactory.openSession();
         }catch (Exception e){
             session =  sessionFactory.openSession();
         }

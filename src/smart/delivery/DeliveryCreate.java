@@ -22,12 +22,14 @@ import java.util.List;
 public class DeliveryCreate {
 
     public String findDeliveryInfo(int orderId){
+        Session session = null;
         try {
-            Session session = DataService.getSession();
+            session = DataService.getSession();
             Transaction tx = DataService.getTransact(session);
             Query q = session.createQuery("from SmartLocalDeliveryEntity where orderid = :ord");
             q.setParameter("ord",orderId);
             List a = q.list();
+            tx.commit();
             if(a == null || a.size() <= 0){
                 return "{\"msg\": \"该订单的派送已存在\",\"code\":-3003}";
             }
@@ -70,6 +72,7 @@ public class DeliveryCreate {
             Query q = session.createQuery("from SmartLocalDeliveryEntity where deliverid = :dd");
             q.setParameter("dd",deliverId);
             List a = q.list();
+            tx.commit();
             if(a == null || a.size() <= 0){
                 return "{\"msg\": \"该订单的派送已存在\",\"code\":-3003}";
             }
