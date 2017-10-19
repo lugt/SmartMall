@@ -48,10 +48,9 @@ public class UserReg {
             if(q.uniqueResult() != null){
                 return "{\"msg\": \"手机号码已存在\",\"code\":-1016}";
             }
-
+            udE.setSess(generateSessionId());
             passWd = Signin.PasswordDigest(udE.getUid(), passWd);
             udE.setPss(passWd);
-            udE.setSess(generateSessionId());
             session.save(udE);
             DataService.finishUp(session,tx);
         } catch (Exception e) {
