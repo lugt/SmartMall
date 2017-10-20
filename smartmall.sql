@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2017 年 10 月 11 日 17:29
+-- 生成日期: 2017 年 10 月 20 日 07:15
 -- 服务器版本: 5.5.20
 -- PHP 版本: 5.3.9
 
@@ -76,7 +76,15 @@ CREATE TABLE IF NOT EXISTS `smart_goods` (
   `spec_array` text COMMENT '序列化存储规格,key值为规则ID，value为此商品具有的规格值',
   `exp` smallint(5) NOT NULL DEFAULT '0' COMMENT '经验值',
   PRIMARY KEY (`goodid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='商品信息表' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品信息表' AUTO_INCREMENT=5 ;
+
+--
+-- 转存表中的数据 `smart_goods`
+--
+
+INSERT INTO `smart_goods` (`goodid`, `name`, `goods_no`, `model_id`, `sell_price`, `market_price`, `cost_price`, `up_time`, `down_time`, `create_time`, `store_nums`, `img`, `is_del`, `content`, `keywords`, `description`, `search_words`, `weight`, `point`, `unit`, `brand_id`, `visit`, `favorite`, `sort`, `list_img`, `small_img`, `spec_array`, `exp`) VALUES
+(4, '鸡肉干', '', 0, 16.00, 32.00, 10.00, NULL, NULL, '2017-10-17 00:00:00', 1000, 'images/123.jpg', 0, NULL, NULL, NULL, NULL, 100.00, 0, 'g', NULL, 500, 450, 3, 'images/03.jpg', 'images/123a.jpg', NULL, 10),
+(3, '鸡肉干', '', 0, 16.00, 32.00, 10.00, NULL, NULL, '2017-10-17 00:00:00', 1000, 'images/123.jpg', 0, NULL, NULL, NULL, NULL, 100.00, 0, NULL, NULL, 0, 0, 99, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -105,6 +113,46 @@ CREATE TABLE IF NOT EXISTS `smart_local_delivery` (
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `smart_order`
+--
+
+CREATE TABLE IF NOT EXISTS `smart_order` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL COMMENT '用户ID',
+  `payment_id` int(11) NOT NULL COMMENT '支付ID',
+  `delivery_id` int(11) DEFAULT NULL COMMENT '配送ID',
+  `merchandise` varchar(300) DEFAULT NULL COMMENT '商品代码、数量、型号组合',
+  `status` tinyint(1) DEFAULT '1' COMMENT '订单状态1:生成订单,2：确认订单,3取消订单,4 物流中订单,5完成订单  6 作废订单',
+  `pay_status` tinyint(1) DEFAULT '0' COMMENT '支付状态 0：未支付，1：已支付，2：退款  3:   部分退款',
+  `distribution_status` tinyint(1) DEFAULT '0' COMMENT '配送状态0：未发送，1：配货 2:  发货中  3 物流中 4 物流问题  5 已签收  6 签收异常   7 缺货  8 延迟发货',
+  `due_amount` decimal(15,2) DEFAULT '0.00' COMMENT '应付商品总金额',
+  `paid_amount` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT '实付商品总金额',
+  `taxes` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT '税金',
+  `payable_freight` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT '总运费金额',
+  `real_freight` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT '实付运费',
+  `pay_fee` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT '支付手续费',
+  `promotions` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT '促销优惠金额总计',
+  `discount` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT '订单折扣或涨价比例',
+  `order_amount` decimal(15,2) NOT NULL DEFAULT '0.00' COMMENT '订单总金额',
+  `pay_time` datetime DEFAULT NULL COMMENT '付款时间',
+  `send_time` datetime DEFAULT NULL COMMENT '发货时间',
+  `create_time` datetime DEFAULT NULL COMMENT '下单时间',
+  `completion_time` datetime DEFAULT NULL COMMENT '订单完成时间',
+  `accept_time` varchar(80) DEFAULT NULL COMMENT '用户收货时间',
+  `invoice` tinyint(1) NOT NULL DEFAULT '0' COMMENT '发票：0不索要 1普通  2 电子发票 3增值税',
+  `invoice_title` varchar(100) DEFAULT NULL COMMENT '发票抬头',
+  `postscript` varchar(255) DEFAULT NULL COMMENT '用户附言',
+  `note` text COMMENT '管理员备注',
+  `prop` varchar(255) DEFAULT NULL COMMENT '使用的优惠券等',
+  `exp` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '增加的经验',
+  `point` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '增加的积分',
+  `type` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0普通订单,1团购订单,2限时抢购',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='订单表' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `smart_users`
 --
 
@@ -120,18 +168,19 @@ CREATE TABLE IF NOT EXISTS `smart_users` (
   `phone` tinytext,
   PRIMARY KEY (`uid`),
   UNIQUE KEY `usn` (`usn`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- 转存表中的数据 `smart_users`
 --
 
 INSERT INTO `smart_users` (`uid`, `usn`, `pss`, `name`, `title`, `priv`, `state`, `sess`, `phone`) VALUES
-(3, 'cell_13520583918', '64e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab0107', 'HelloWorld', NULL, 'view,order,deliver,pay', 0, 'jpnaIGRD0hduz4z7CF9', '13520583918'),
+(3, 'cell_13520583918', '64e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab0107', 'HelloWorld', NULL, 'view,order,deliver,pay', 0, 'YyPO6D6dvJkyaqBPmJK', '13520583918'),
 (4, 'cell_13520583919', '64e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab0107', 'HelloWorld', NULL, 'view,order,deliver,pay', 0, 'b95owDwyksLtuH1GuMQ', '13520583919'),
-(5, 'cell_13520583920', '64e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab0107', 'HelloWorld', NULL, 'view,order,deliver,pay', 0, 'ljSnbAvusICVgYkdc1b', '13520583920'),
+(5, 'cell_13520583920', '64e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab0107', 'HelloWorld', NULL, 'view,order,deliver,pay', 0, '8FQNlSCCm7MYJAfSB2L', '13520583920'),
 (6, 'cell_13520583921', '64e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab0107', 'HelloWorld', NULL, 'view,order,deliver,pay', 0, 'bNDadaLc85DpaQLl0Df', '13520583921'),
-(7, 'cell_13520583922', '64e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab0107', 'HelloWorld', NULL, 'view,order,deliver,pay', 0, 'IRGqapakOQMnr25NyEB', '13520583922');
+(7, 'cell_13520583922', '64e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab0107', 'HelloWorld', NULL, 'view,order,deliver,pay', 0, 'IRGqapakOQMnr25NyEB', '13520583922'),
+(13, 'cell_18611823551', '64e604787cbf194841e7b68d7cd28786f6c9a0a3ab9f8b0a0e87cb4387ab0107', '123', NULL, 'view,order,deliver,pay', 0, 'wFHtHLLHqCKdX0j8qTv', '18611823551');
 
 -- --------------------------------------------------------
 
