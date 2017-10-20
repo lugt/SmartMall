@@ -30,12 +30,22 @@ public class OrderCreate{
     public static SmartOrderEntity initiate(JSONArray goods, int uid){
         // goods;
         SmartOrderEntity soe = new SmartOrderEntity();
+
         // 写入基本信息
-        soe.setCreateTime(Timestamp.from(Instant.now()));
+        Instant ins = Instant.now();
+        soe.setCreateTime(Timestamp.from(ins));
         soe.setDiscount(BigDecimal.valueOf(1.0));
         soe.setStatus((byte) 1);
         soe.setType((byte) 1);
+
+        /*
+        *   默认状态
+        * */
+        soe.setPayStatus((byte) 0);
+        soe.setDistributionStatus((byte) 0);
+
         soe.setUserId(uid);
+
         // 计算Subtotal
         List<BigDecimal> subtotal = new ArrayList<>();
         JSONStringer jss = new JSONStringer();
@@ -58,12 +68,18 @@ public class OrderCreate{
             // 加入储存单个商品
             x.value(onegood);
         }
+
         soe.setMerchandise(x.endArray().toString());
         // 计算Subtotal 总和、折扣
 
 
         // TODO:准备发票部分
 
+        soe.setAcceptTime("0");
+        soe.setCompletionTime(Timestamp.from(ins));
+        soe.setSendTime(Timestamp.from(ins));
+        soe.setPayTime(Timestamp.from(ins));
+        soe.setInvoiceTitle("empty");
 
         // 准备物流信息
         soe.setDeliveryId(0);
@@ -71,6 +87,7 @@ public class OrderCreate{
         // 准备支付信息
         soe.setProp("{}");// 计算使用的优惠券信息
         soe.setDueAmount(MainTotal); // 计算需要支付的价格
+        soe.setPaidAmount(BigDecimal.ZERO);
 
         // 准备优惠计算
         return soe;
@@ -206,8 +223,7 @@ public class OrderCreate{
     }
 
     public static String pasrseCreate(int uid, String products, int payment, int delivery, int delAddr) {
-        JSONObject s = new JSONObject(products);
-        JSONArray datas = s.getJSONArray("data");
+        JSONArray datas = new JSONArray(products);
         if(datas != null){
             SmartOrderEntity soe = initiate(datas,uid);
             if(soe == null){

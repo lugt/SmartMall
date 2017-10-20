@@ -4,11 +4,15 @@ import io.netty.buffer.ByteBuf;
 import org.json.JSONObject;
 import smart.server.IServiceProvider;
 import smart.server.ServiceRegistry;
+import smart.utils.core.LoggerManager;
 import smart.utils.data.HttpsUtil;
 import smart.utils.data.UrlEncode;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class ServiceProvider implements IServiceProvider {
     public String distribute(String q, ByteBuf byteBuf) {
@@ -39,13 +43,12 @@ public class ServiceProvider implements IServiceProvider {
 
         if(x.containsKey("action")){
             outer = x.get("action");
-            Long uid = 0L;
+            int uid = 0;
             try {
                 String token = x.get("token");
-                String userInfo = HttpsUtil.basicHttpPost(ServiceRegistry.getUrl("users"),null);
+                String userInfo = HttpsUtil.basicHttpPost(ServiceRegistry.getUrl("users") + "?action=oauth&token="+token,null);
                 JSONObject jsob = new JSONObject(userInfo);
-                jsob.getString("");
-                uid = jsob.getLong("uid");
+                uid = jsob.getInt("uid");
             }catch (Exception e){
                 return "{\"msg\": \"登录信息无法验证\",\"code\":-1015}";
             }
@@ -53,12 +56,13 @@ public class ServiceProvider implements IServiceProvider {
             if("create".equals(outer)){
                 // commos -> orderid
                 try {
-                    String products = x.get("products");
+                    String products = URLDecoder.decode(x.get("products"),"utf-8");
                     int payment = Integer.valueOf(x.get("payment"));
                     int delivery = Integer.valueOf(x.get("delivery"));
                     int addr = Integer.valueOf(x.get("addr"));
                     return OrderCreate.pasrseCreate(Math.toIntExact(uid),products,payment,delivery,addr);
                 }catch (Exception e){
+                    LoggerManager.i("OrderCreate:"+e.getMessage());
                     return "{\"msg\": \"请检查输入\",\"code\":-1014}";
                 }
             }else if("find_uid".equals(outer)){

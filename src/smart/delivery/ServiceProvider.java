@@ -35,9 +35,8 @@ public class ServiceProvider implements IServiceProvider {
         int uid = 0;
         try {
             String token = x.get("token");
-            String userInfo = HttpsUtil.basicHttpPost(ServiceRegistry.getUrl("users"),null);
+            String userInfo = HttpsUtil.basicHttpPost(ServiceRegistry.getUrl("users") + "?action=oauth&token="+token,null);
             JSONObject jsob = new JSONObject(userInfo);
-            jsob.getString("");
             uid = jsob.getInt("uid");
         }catch (Exception e){
             return "{\"msg\": \"登录信息无法验证\",\"code\":-1015}";
