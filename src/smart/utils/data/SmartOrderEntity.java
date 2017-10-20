@@ -7,6 +7,9 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "smart_order", schema = "smartmall", catalog = "")
 public class SmartOrderEntity {
+
+    @Id
+    @GeneratedValue
     private int id;
     private int userId;
     private int paymentId;

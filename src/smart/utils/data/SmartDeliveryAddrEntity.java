@@ -6,6 +6,8 @@ import java.io.Serializable;
 @Entity
 @Table(name = "smart_delivery_addr", schema = "smartmall", catalog = "")
 public class SmartDeliveryAddrEntity {
+    @Id
+    @GeneratedValue
     private int addrid;
     private Integer uid;
     private Integer mobile;

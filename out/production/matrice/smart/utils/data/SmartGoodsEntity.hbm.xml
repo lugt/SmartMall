@@ -7,6 +7,7 @@
     <class name="smart.utils.data.SmartGoodsEntity" table="smart_goods" schema="smartmall">
         <id name="goodid">
             <column name="goodid" sql-type="int(10) unsigned"/>
+            <generator class="native" />
         </id>
         <property name="name">
             <column name="name" sql-type="varchar(50)" length="50"/>

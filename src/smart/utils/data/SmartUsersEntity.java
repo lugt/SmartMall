@@ -6,6 +6,8 @@ import java.io.Serializable;
 @Entity
 @Table(name = "smart_users", schema = "smartmall", catalog = "")
 public class SmartUsersEntity {
+    @Id
+    @GeneratedValue
     private int uid;
     private String usn;
     private String pss;

@@ -5,6 +5,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "smart_local_delivery", schema = "smartmall", catalog = "")
 public class SmartLocalDeliveryEntity {
+    @Id
+    @GeneratedValue
     private int deliverid;
     private Integer orderid;
     private int uid;

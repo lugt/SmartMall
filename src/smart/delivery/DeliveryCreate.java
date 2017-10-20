@@ -1,11 +1,13 @@
 package smart.delivery;
 
 import earth.server.Monitor;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.json.JSONStringer;
 import smart.server.DataService;
+import smart.utils.data.SmartDeliveryAddrEntity;
 import smart.utils.data.SmartLocalDeliveryEntity;
 
 import java.util.List;
@@ -18,6 +20,14 @@ import java.util.List;
 public class DeliveryCreate {
 
     public String findDeliveryInfo(int orderId){
+        try {
+            return formater(findByOrderId(orderId));
+        }catch (HibernateException e){
+            return e.getMessage();
+        }
+    }
+
+    private SmartLocalDeliveryEntity findByOrderId(int orderId) throws HibernateException{
         Session session = null;
         try {
             session = DataService.getSessionA();
@@ -27,15 +37,15 @@ public class DeliveryCreate {
             List a = q.list();
             DataService.finishUp(session,tx);
             if(a == null || a.size() <= 0){
-                return "{\"msg\": \"该订单的派送已存在\",\"code\":-3003}";
+                throw new HibernateException( "{\"msg\": \"该订单的派送已存在\",\"code\":-3003}");
             }
             SmartLocalDeliveryEntity sme = (SmartLocalDeliveryEntity) a.get(0);
-            return formater(sme);
+            return sme;
         } catch (Exception e) {
             Long k = System.currentTimeMillis();
             e.printStackTrace();
             Monitor.logger("[Search Fail] ID:" + k.toString() + " / " + e.getMessage());
-            return "{\"msg\": \"无法找寻派送信息\",\"code\":-3006}";
+            throw new HibernateException("{\"msg\": \"无法找寻派送信息\",\"code\":-3006}");
         }
     }
 
@@ -92,21 +102,35 @@ public class DeliveryCreate {
             slde.setStarttime(now);
             slde.setUid(uid);
             slde.setType(1);
+            /**
+             *      分配配送情况
+             * */
+            slde.setCarrier("default");
             slde.setSender("default");
+
+            slde.setPackagetime(0);
+            slde.setReservetime(0);
+            slde.setStarttime(0);
+            slde.setAccepttime(0);
+            slde.setConfirmtime(0);
+
             slde.setStatus(1100);
             slde.setAddress(addrId);
             slde.setOrderid(orderId);
+            slde.setLogs("");
+
+
             if(rsvTime == 0){
                 rsvTime = now;
             }
             slde.setReservetime(rsvTime);
             session.save(slde);
-            int dlvId = slde.getDeliverid();
             DataService.finishUp(session,tx);
-            if(dlvId <= 0){
+            slde = findByOrderId(orderId);
+            if(slde == null || slde.getDeliverid() < 1) {
                 return "{\"msg\": \"没有得到派送号码\",\"code\":-3002}";
             }
-            return "{\"delivery\":"+dlvId+",\"code\":1000,\"carrier\":\""+slde.getCarrier()+"\"}";
+            return "{\"delivery\":"+slde.getDeliverid()+",\"code\":1000,\"carrier\":\""+slde.getCarrier()+"\"}";
         } catch (Exception e) {
             Long k = System.currentTimeMillis();
             e.printStackTrace();

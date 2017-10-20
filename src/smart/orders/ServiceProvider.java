@@ -9,10 +9,8 @@ import smart.utils.data.HttpsUtil;
 import smart.utils.data.UrlEncode;
 
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.Map;
-import java.util.logging.Logger;
 
 public class ServiceProvider implements IServiceProvider {
     public String distribute(String q, ByteBuf byteBuf) {
@@ -60,7 +58,7 @@ public class ServiceProvider implements IServiceProvider {
                     int payment = Integer.valueOf(x.get("payment"));
                     int delivery = Integer.valueOf(x.get("delivery"));
                     int addr = Integer.valueOf(x.get("addr"));
-                    return OrderCreate.pasrseCreate(Math.toIntExact(uid),products,payment,delivery,addr);
+                    return OrderCreate.pasrseCreate(Math.toIntExact(uid),products,payment,delivery,addr,x.get("token"));
                 }catch (Exception e){
                     LoggerManager.i("OrderCreate:"+e.getMessage());
                     return "{\"msg\": \"请检查输入\",\"code\":-1014}";

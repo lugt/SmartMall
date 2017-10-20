@@ -1,6 +1,7 @@
 package smart.orders;
 
 import earth.server.Monitor;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -10,6 +11,7 @@ import org.json.JSONStringer;
 import org.json.JSONWriter;
 import smart.server.DataService;
 import smart.server.ServiceRegistry;
+import smart.utils.core.LoggerManager;
 import smart.utils.data.HttpsUtil;
 import smart.utils.data.SmartOrderEntity;
 
@@ -35,7 +37,7 @@ public class OrderCreate{
         Instant ins = Instant.now();
         soe.setCreateTime(Timestamp.from(ins));
         soe.setDiscount(BigDecimal.valueOf(1.0));
-        soe.setStatus((byte) 1);
+        soe.setStatus((byte) 0);
         soe.setType((byte) 1);
 
         /*
@@ -71,9 +73,17 @@ public class OrderCreate{
 
         soe.setMerchandise(x.endArray().toString());
         // 计算Subtotal 总和、折扣
+        soe.setOrderAmount(MainTotal);
+        JSONObject jsob = new JSONObject();
+        jsob.put("wechat",1);
+        soe.setProp(jsob.toString());// 计算使用的优惠券信息
+        soe.setPostscript("");
+        soe.setNote("");
 
+        BigDecimal bc = MainTotal;
 
         // TODO:准备发票部分
+        soe.setTaxes(BigDecimal.ZERO);
 
         soe.setAcceptTime("0");
         soe.setCompletionTime(Timestamp.from(ins));
@@ -83,25 +93,41 @@ public class OrderCreate{
 
         // 准备物流信息
         soe.setDeliveryId(0);
+        soe.setPayableFreight(BigDecimal.ZERO);
+        soe.setRealFreight(BigDecimal.ZERO);
+        soe.setPayFee(BigDecimal.ZERO);
+
+        int a = (int) Math.floor((Math.random() * 1000000));
+        a = a % 50;
+        BigDecimal promo = BigDecimal.valueOf(a / 100.0);
+        soe.setPromotions(promo);
+
+        if(bc.compareTo(promo) > 0){
+            bc = bc.subtract(promo);
+            soe.setStatus((byte) 2);
+            soe.setPayStatus((byte) 2);
+        }else{
+            bc = BigDecimal.ZERO;
+        }
 
         // 准备支付信息
-        soe.setProp("{}");// 计算使用的优惠券信息
-        soe.setDueAmount(MainTotal); // 计算需要支付的价格
+        soe.setDueAmount(bc); // 计算需要支付的价格
         soe.setPaidAmount(BigDecimal.ZERO);
 
         // 准备优惠计算
         return soe;
     }
 
-    public static String commitCreate(int uid, SmartOrderEntity soe, int paymethod, int delivermethod, int deliveraddr) {
+    public static String commitCreate(int uid, SmartOrderEntity soe, int paymethod, int delivermethod, int deliveraddr, String token) {
         try {
             Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
             session.save(soe);
+            soe = findOEByUid(uid);
             if(soe.getId() > 0){
                 //ok
                 DataService.finishUp(session,tx);
-                int a = execute_create_order(soe,paymethod,delivermethod,deliveraddr);
+                int a = execute_create_order(soe,paymethod,delivermethod,deliveraddr,token);
                 if(a < 0){
                     return "{\"msg\": \"订单准备操作失败\",\"code\":"+a+"}";
                 }
@@ -118,7 +144,7 @@ public class OrderCreate{
         }
     }
 
-    private static int execute_create_order(SmartOrderEntity soe, int paymethod, int delivermethod, int deliverAddr) throws NoSuchProviderException {
+    private static int execute_create_order(SmartOrderEntity soe, int paymethod, int delivermethod, int deliverAddr, String token) throws NoSuchProviderException {
 
         // TODO: 在这里使用 Service Registry 队列， 本地直接返回
         //  TODO : 操作优惠信息 -02
@@ -130,8 +156,10 @@ public class OrderCreate{
             url += "?action=create&order="+soe.getId();
             url += "&addr="+deliverAddr;
             url += "&rsvtime="+(System.currentTimeMillis() / 1000);
+            url += "&token="+token;
             try {
-                HttpsUtil.basicHttpPost(url,null);
+                String y = HttpsUtil.basicHttpPost(url,null);
+                LoggerManager.i(y);
             } catch (IOException | KeyManagementException | CertificateException | NoSuchAlgorithmException | KeyStoreException e) {
                 e.printStackTrace();
                 return -6020;
@@ -149,6 +177,27 @@ public class OrderCreate{
         }
          // 测试用
     }
+    public static SmartOrderEntity findOEByUid(int uid) throws HibernateException{
+        try {
+            Session session = DataService.getSessionA();
+            Transaction tx = DataService.getTransact(session);
+            Query q = session.createQuery("from SmartOrderEntity where userId = :uuid order by id desc");
+            q.setParameter("uuid",uid);
+            q.setMaxResults(1);
+            SmartOrderEntity soe = (SmartOrderEntity) q.uniqueResult();
+            DataService.finishUp(session,tx);
+            if(soe == null || soe.getId() <= 0){
+                throw new HibernateException("{\"msg\": \"没有得到订单\",\"code\":-6018}");
+            }
+            return soe;
+        } catch (Exception e) {
+            Long k = System.currentTimeMillis();
+            e.printStackTrace();
+            Monitor.logger("[Get Id Fail] ID:" + k.toString() + " / " + e.getMessage());
+            throw new HibernateException( "{\"msg\": \"无法搜索订单信息2\",\"code\":-6017}");
+        }
+    }
+
 
     public static String findUid(int uid,int len) {
         try {
@@ -222,14 +271,14 @@ public class OrderCreate{
         return BigDecimal.valueOf(-100000);
     }
 
-    public static String pasrseCreate(int uid, String products, int payment, int delivery, int delAddr) {
+    public static String pasrseCreate(int uid, String products, int payment, int delivery, int delAddr, String token) {
         JSONArray datas = new JSONArray(products);
         if(datas != null){
             SmartOrderEntity soe = initiate(datas,uid);
             if(soe == null){
                 return "{\"msg\": \"无法计算商品价格\",\"code\":-6015}";
             }
-            return commitCreate(uid,soe,payment,delivery,delAddr);
+            return commitCreate(uid,soe,payment,delivery,delAddr, token);
         }else{
             return "{\"msg\": \"没有选择商品\",\"code\":-6014}";
         }
