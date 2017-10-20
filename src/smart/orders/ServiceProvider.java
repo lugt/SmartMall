@@ -51,16 +51,24 @@ public class ServiceProvider implements IServiceProvider {
                 return "{\"msg\": \"登录信息无法验证\",\"code\":-1015}";
             }
 
-            if("create".equals(outer)){
+            if("create".equals(outer)) {
                 // commos -> orderid
                 try {
-                    String products = URLDecoder.decode(x.get("products"),"utf-8");
+                    String products = URLDecoder.decode(x.get("products"), "utf-8");
                     int payment = Integer.valueOf(x.get("payment"));
                     int delivery = Integer.valueOf(x.get("delivery"));
                     int addr = Integer.valueOf(x.get("addr"));
-                    return OrderCreate.pasrseCreate(Math.toIntExact(uid),products,payment,delivery,addr,x.get("token"));
-                }catch (Exception e){
-                    LoggerManager.i("OrderCreate:"+e.getMessage());
+                    return OrderCreate.pasrseCreate(Math.toIntExact(uid), products, payment, delivery, addr, x.get("token"));
+                } catch (Exception e) {
+                    LoggerManager.i("OrderCreate:" + e.getMessage());
+                    return "{\"msg\": \"请检查输入\",\"code\":-1014}";
+                }
+            }else if("find_one".equals(outer)){
+                try {
+                    int order = Integer.valueOf(x.get("order"));
+                    return OrderCreate.findOEById(order);
+                } catch (Exception e) {
+                    LoggerManager.i("OrderCreate:" + e.getMessage());
                     return "{\"msg\": \"请检查输入\",\"code\":-1014}";
                 }
             }else if("find_uid".equals(outer)){

@@ -131,7 +131,7 @@ public class OrderCreate{
                 if(a < 0){
                     return "{\"msg\": \"订单准备操作失败\",\"code\":"+a+"}";
                 }
-                return "{'order':"+soe.getId()+",'code':1000}";
+                return "{\"order\":"+soe.getId()+",\"code\":1000}";
             }else{
                 DataService.finishUp(session,tx);
                 return "{\"msg\": \"没有得到订单号码\",\"code\":-6005}";
@@ -235,8 +235,13 @@ public class OrderCreate{
         jsob.put("commodity",soe.getMerchandise());
         jsob.put("paid",soe.getPaidAmount());
         jsob.put("due",soe.getDueAmount());
+        jsob.put("orderprice",soe.getOrderAmount());
+        jsob.put("promote",soe.getPromotions());
+        jsob.put("payfee",soe.getPayFee());
+        jsob.put("freight",soe.getRealFreight());
         jsob.put("acceptTime",soe.getAcceptTime());
         jsob.put("createTime",soe.getCreateTime());
+        jsob.put("packTime",soe.getSendTime());
         return jsob;
     }
 
@@ -281,6 +286,30 @@ public class OrderCreate{
             return commitCreate(uid,soe,payment,delivery,delAddr, token);
         }else{
             return "{\"msg\": \"没有选择商品\",\"code\":-6014}";
+        }
+    }
+
+    public static String findOEById(int order) {
+        try {
+            Session session = DataService.getSessionA();
+            Transaction tx = DataService.getTransact(session);
+            Query q = session.createQuery("from SmartOrderEntity where id = :uss");
+            q.setParameter("uss",order);
+            q.setMaxResults(1);
+            SmartOrderEntity soe = (SmartOrderEntity) q.uniqueResult();
+            DataService.finishUp(session,tx);
+            if(soe == null || soe.getId() <= 0){
+                return "{\"msg\": \"没有得到订单\",\"code\":-6010}";
+            }
+            JSONObject jsob = new JSONObject();
+            jsob.put("code",1000);
+            jsob.put("order",getOrderJSONOBJ(soe));
+            return jsob.toString();
+        } catch (Exception e) {
+            Long k = System.currentTimeMillis();
+            e.printStackTrace();
+            Monitor.logger("[Commit Fail] ID:" + k.toString() + " / " + e.getMessage());
+            return "{\"msg\": \"无法搜索订单信息\",\"code\":-6008}";
         }
     }
 }

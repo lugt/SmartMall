@@ -75,6 +75,9 @@ http://127.0.0.1/api/orders?action=create&products={JSON}&payment=2&delivery=2&a
 订单查询（UID）
 http://127.0.0.1/api/orders?action=list
 
+订单查询（指定orderId）
+
+
 
 创建配送信息（主要是后台使用）
 http://127.0.0.1/api/delivery?action=create&order=2001&addr=3&rsvtime=1502020315
