@@ -150,9 +150,10 @@ public class OrderCreate{
         //  TODO : 操作优惠信息 -02
         // HttpsUtil.basicHttpPost()
         // 操作物流信息 -03
+        String url;
         if(delivermethod == 2){
             // gettype ： 获取订单类型：是否为上门订单
-            String url = ServiceRegistry.getUrl("delivery");
+            url = ServiceRegistry.getUrl("delivery");
             url += "?action=create&order="+soe.getId();
             url += "&addr="+deliverAddr;
             url += "&rsvtime="+(System.currentTimeMillis() / 1000);
@@ -161,7 +162,7 @@ public class OrderCreate{
                 String y = HttpsUtil.basicHttpPost(url,null);
                 LoggerManager.i(y);
             } catch (IOException | KeyManagementException | CertificateException | NoSuchAlgorithmException | KeyStoreException e) {
-                e.printStackTrace();
+                LoggerManager.i(url + e.getMessage());
                 return -6020;
             }
         }else{

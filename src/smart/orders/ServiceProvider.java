@@ -34,6 +34,7 @@ public class ServiceProvider implements IServiceProvider {
         Map<String, String> x = UrlEncode.getUrlParams(outer);
 
         /**
+         *
          *  判断执行的操作
          *
          * */
@@ -68,7 +69,7 @@ public class ServiceProvider implements IServiceProvider {
                     int order = Integer.valueOf(x.get("order"));
                     return OrderCreate.findOEById(order);
                 } catch (Exception e) {
-                    LoggerManager.i("OrderCreate:" + e.getMessage());
+                    LoggerManager.i("OrderFOne:" + e.getMessage());
                     return "{\"msg\": \"请检查输入\",\"code\":-1014}";
                 }
             }else if("find_uid".equals(outer)){
