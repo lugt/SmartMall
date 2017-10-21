@@ -123,17 +123,18 @@ public class OrderCreate{
             Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
             session.save(soe);
+            tx.commit();
             soe = findOEByUid(uid);
             if(soe.getId() > 0){
                 //ok
-                DataService.finishUp(session,tx);
+                //DataService.finishUp(session,tx);
                 int a = execute_create_order(soe,paymethod,delivermethod,deliveraddr,token);
                 if(a < 0){
                     return "{\"msg\": \"订单准备操作失败\",\"code\":"+a+"}";
                 }
                 return "{\"order\":"+soe.getId()+",\"code\":1000}";
             }else{
-                DataService.finishUp(session,tx);
+                //DataService.finishUp(session,tx);
                 return "{\"msg\": \"没有得到订单号码\",\"code\":-6005}";
             }
         } catch (Exception e) {
@@ -212,12 +213,15 @@ public class OrderCreate{
             if(x == null || x.size() < 1){
                 return "{\"msg\": \"没有得到订单\",\"code\":-6010}";
             }
-            JSONWriter jsw = new JSONStringer().key("code").value(1000).key("orders").array();
+            JSONObject jsob = new JSONObject();
+            jsob.put("code",1000);
+            JSONArray jsar = new JSONArray();
             for(Object soc : x){
                 SmartOrderEntity soec = (SmartOrderEntity) soc;
-                jsw.value(getOrderJSONOBJ(soec));
+                jsar.put(getOrderJSONOBJ(soec));
             }
-            return jsw.endArray().toString();
+            jsob.put("orders",jsar);
+            return jsob.toString();
         } catch (Exception e) {
             Long k = System.currentTimeMillis();
             e.printStackTrace();
@@ -247,9 +251,9 @@ public class OrderCreate{
     }
 
     public static BigDecimal calcCommidityValue(int goods_id, int models, double quantity) {
-
+        String url = ServiceRegistry.getUrl("commodity") + "?action=find_good&commodity="+goods_id;
         try {
-            String k = HttpsUtil.basicHttpPost(ServiceRegistry.getUrl("commodity") + "?action=find_good&commodity="+goods_id,null);
+            String k = HttpsUtil.basicHttpPost(url,null);
             JSONObject jsobj = new JSONObject(k);
             if(jsobj.getInt("code") == 1000){
                 BigDecimal subtotal = BigDecimal.ZERO;
@@ -262,17 +266,9 @@ public class OrderCreate{
                 return BigDecimal.valueOf(-100000);
             }
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (KeyManagementException e) {
-            e.printStackTrace();
-        } catch (NoSuchProviderException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (CertificateException e) {
-            e.printStackTrace();
-        } catch (KeyStoreException e) {
-            e.printStackTrace();
+            LoggerManager.i("calcCommoPrices : IO/" + url + " | " + e.getMessage());
+        } catch (KeyManagementException | NoSuchProviderException | NoSuchAlgorithmException | KeyStoreException | CertificateException e) {
+            LoggerManager.i("calcCommoPrices : HTTPS/" +e.getMessage());
         }
         return BigDecimal.valueOf(-100000);
     }

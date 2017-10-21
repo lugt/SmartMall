@@ -59,6 +59,6 @@ public class ServiceRegistry {
     }
 
     public static String getUrl(String model) {
-        return "http://127.0.0.1:8015/api/"+model+"/go.php";
+        return "http://127.0.0.1/api/"+model;
     }
 }

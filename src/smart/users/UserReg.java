@@ -53,6 +53,7 @@ public class UserReg {
             udE.setPss(passWd);
             session.save(udE);
             DataService.finishUp(session,tx);
+            LoginCache.currentUsers.put(udE.getSess(),udE);
         } catch (Exception e) {
             Long k = System.currentTimeMillis();
             e.printStackTrace();

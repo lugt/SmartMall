@@ -28,16 +28,17 @@ public class HttpsUtil {
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestProperty("User-Agent", "Mozilla/5.0 Google/Chrome (Windows NT 6.1; WOW64)");
         con.setRequestProperty("Accept-Language", "zh-CN,en;q=0.5");
-        con.setRequestMethod("POST");
-        con.setConnectTimeout(5000);
-        con.setReadTimeout(5000);
-        con.setDoOutput(true);
+        con.setConnectTimeout(2000);
+        con.setReadTimeout(2000);
         if(data != null && data.length > 0) {
+            con.setRequestMethod("POST");
             OutputStream out = con.getOutputStream();
             out.write(data);
+        }else{
+            con.setRequestMethod("GET");
         }
         con.connect();
-        Object objs = con.getContent();
+        //Object objs = con.getContent();
         // 取得该连接的输入流，以读取响应内容
         InputStream ins = con.getInputStream();
         int len = ins.available();
@@ -57,9 +58,8 @@ public class HttpsUtil {
                 throw new IOException("buf too huge");
             }
         }
-        String response = String.valueOf(buf);
         //LoggerManager.i(response);
-        return response;
+        return String.valueOf(buf);
     }
 
     public static String basicHttpsPost(String uri,byte[] data)
