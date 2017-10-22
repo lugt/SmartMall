@@ -81,7 +81,6 @@ public class NanshanHandler extends ChannelInboundHandlerAdapter {
             ctx.write(response);
             ctx.flush();
             ctx.close();
-
         }
     }
 

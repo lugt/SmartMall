@@ -48,28 +48,44 @@ public class ServiceProvider implements IServiceProvider {
          * */
         if(x.containsKey("action")) {
             outer = x.get("action");
-            if ("address_set".equals(outer)) {
+            if ("user_set_addrs".equals(outer)) {
+                try {
+                    int addr1 = Integer.valueOf(x.get("addr1"));
+                    int addr2 = Integer.valueOf(x.get("addr2"));
+                    int addr3 = Integer.valueOf(x.get("addr3"));
+                    int addr4 = Integer.valueOf(x.get("addr4"));
+                    return new AddressControl().commitSaveUserAddr(uid,addr1,addr2,addr3,addr4);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "{\"msg\":\"创建操作出现异常\",\"code\":-7013}";
+                }
+            }else if ("address_get".equals(outer)) {
                 try {
                     int addrid = Integer.valueOf(x.get("addrid"));
-                    int province = Integer.valueOf(x.get("province"));
+                    return new AddressControl().getAddrInfo(addrid);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "{\"msg\":\"创建操作出现异常\",\"code\":-7012}";
+                }
+            }else if ("address_set".equals(outer)) {
+                try {
+                    int district = Integer.valueOf(x.get("dst"));
+                    int province = Integer.valueOf(x.get("prv"));
                     int city = Integer.valueOf(x.get("city")); // DeliverMethod
                     String addr = x.get("addr"); // DeliverMethod
                     String receiver = x.get("rsver"); // DeliverMethod
                     Long receiverPhone = Long.parseLong(x.get("phone")); // DeliverMethod
-                    return new AddressControl().commitChange(province,city,addr,receiver,receiverPhone);
+                    return new AddressControl().commitChangeAddr(uid,province,city,district,addr,receiver,receiverPhone);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return "{\"msg\":\"创建操作出现异常\",\"code\":-3007}";
+                    return "{\"msg\":\"创建操作出现异常\",\"code\":-7011}";
                 }
-            }else if ("address_list".equals(outer)) {
+            }else if ("user_addrs".equals(outer)) {
                 try {
-                    int ordId = Integer.valueOf(x.get("order"));
-                    int addrId = Integer.valueOf(x.get("addr")); // DeliverMethod
-                    int rsvTime = Integer.valueOf(x.get("rsvtime")); // DeliverMethod
-                    return new DeliveryCreate().commitCreate(ordId, addrId, uid, rsvTime);
+                    return new AddressControl().getUserAddrs(uid);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return "{\"msg\":\"创建操作出现异常\",\"code\":-3007}";
+                    return "{\"msg\":\"创建操作出现异常\",\"code\":-7010}";
                 }
             }else if ("create".equals(outer)) {
                 try {

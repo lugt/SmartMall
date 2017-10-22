@@ -10,7 +10,7 @@ public class SmartDeliveryAddrEntity {
     @GeneratedValue
     private int addrid;
     private Integer uid;
-    private Integer mobile;
+    private Long mobile;
     private Serializable addr;
     private Serializable memo;
     private Serializable recver;
@@ -41,11 +41,11 @@ public class SmartDeliveryAddrEntity {
 
     @Basic
     @Column(name = "mobile", nullable = true)
-    public Integer getMobile() {
+    public Long getMobile() {
         return mobile;
     }
 
-    public void setMobile(Integer mobile) {
+    public void setMobile(Long mobile) {
         this.mobile = mobile;
     }
 

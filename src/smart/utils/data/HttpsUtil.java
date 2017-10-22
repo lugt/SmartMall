@@ -28,8 +28,8 @@ public class HttpsUtil {
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestProperty("User-Agent", "Mozilla/5.0 Google/Chrome (Windows NT 6.1; WOW64)");
         con.setRequestProperty("Accept-Language", "zh-CN,en;q=0.5");
-        con.setConnectTimeout(2000);
-        con.setReadTimeout(2000);
+        con.setConnectTimeout(20000);
+        con.setReadTimeout(20000);
         if(data != null && data.length > 0) {
             con.setRequestMethod("POST");
             OutputStream out = con.getOutputStream();

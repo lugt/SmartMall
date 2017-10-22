@@ -12,14 +12,16 @@ import io.netty.handler.codec.http.HttpRequestDecoder;
 import io.netty.handler.codec.http.HttpResponseEncoder;
 import smart.utils.core.LoggerManager;
 
+import java.util.Optional;
+
 /**
  * Created by Frapo on 2017/1/22.
  */
 public class Nanshan {
-
+    
     public void start(int port) throws Exception {
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        EventLoopGroup bossGroup = new NioEventLoopGroup(2);
+        EventLoopGroup workerGroup = new NioEventLoopGroup(8);
         //try {
         ServerBootstrap b = new ServerBootstrap();
         b.option(ChannelOption.SO_KEEPALIVE,false);
