@@ -5,6 +5,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.json.JSONObject;
 import org.json.JSONStringer;
 import smart.server.DataService;
 import smart.utils.data.SmartDeliveryAddrEntity;
@@ -21,7 +22,7 @@ public class DeliveryCreate {
 
     public String findDeliveryInfo(int orderId){
         try {
-            return formater(findByOrderId(orderId));
+            return formater(findByOrderId(orderId)).toString();
         }catch (HibernateException e){
             return e.getMessage();
         }
@@ -49,26 +50,26 @@ public class DeliveryCreate {
         }
     }
 
-    public static String formater(SmartLocalDeliveryEntity sme){
-        JSONStringer jsw = new JSONStringer();
-        jsw.key("address").value(sme.getAddress());
-        jsw.key("acc_time").value(sme.getAccepttime());
-        jsw.key("carrier").value(sme.getCarrier());
-        jsw.key("con").value(sme.getConfirmtime());
-        jsw.key("carrier").value(sme.getCarrier());
-        jsw.key("confirm_time").value(sme.getConfirmtime());
-        jsw.key("logs").value(sme.getLogs());
-        jsw.key("starttime").value(sme.getStarttime());
-        jsw.key("status").value(sme.getStatus());
-        jsw.key("sender").value(sme.getSender());
-        jsw.key("pack_time").value(sme.getPackagetime());
-        jsw.key("deliver_id").value(sme.getDeliverid());
-        jsw.key("order_id").value(sme.getOrderid());
-        jsw.key("rsv_time").value(sme.getReservetime());
-        jsw.key("uid").value(sme.getUid());
-        jsw.key("type").value(sme.getType());
-        jsw.key("code").value(1000);
-        return jsw.toString();
+    public static JSONObject formater(SmartLocalDeliveryEntity sme){
+        JSONObject jsw = new JSONObject();
+        jsw.put("address",sme.getAddress());
+        jsw.put("acc_time",sme.getAccepttime());
+        jsw.put("carrier",sme.getCarrier());
+        jsw.put("con",sme.getConfirmtime());
+        jsw.put("carrier",sme.getCarrier());
+        jsw.put("confirm_time",sme.getConfirmtime());
+        jsw.put("logs",sme.getLogs());
+        jsw.put("starttime",sme.getStarttime());
+        jsw.put("status",sme.getStatus());
+        jsw.put("sender",sme.getSender());
+        jsw.put("pack_time",sme.getPackagetime());
+        jsw.put("deliver_id",sme.getDeliverid());
+        jsw.put("order_id",sme.getOrderid());
+        jsw.put("rsv_time",sme.getReservetime());
+        jsw.put("uid",sme.getUid());
+        jsw.put("type",sme.getType());
+        jsw.put("code",1000);
+        return jsw;
     }
 
     public String findDeliveryInfoByDeliveryId(int deliverId){
@@ -83,7 +84,7 @@ public class DeliveryCreate {
                 return "{\"msg\": \"该订单的派送已存在\",\"code\":-3003}";
             }
             SmartLocalDeliveryEntity slde = (SmartLocalDeliveryEntity) a.get(0);
-            return formater(slde);
+            return formater(slde).toString();
         } catch (Exception e) {
             Long k = System.currentTimeMillis();
             e.printStackTrace();
