@@ -59,7 +59,7 @@ public class ServiceProvider implements IServiceProvider {
                     int payment = Integer.valueOf(x.get("payment"));
                     int delivery = Integer.valueOf(x.get("delivery"));
                     int addr = Integer.valueOf(x.get("addr"));
-                    return OrderCreate.pasrseCreate(Math.toIntExact(uid), products, payment, delivery, addr, x.get("token"));
+                    return OrderCreate.parseCreate(Math.toIntExact(uid), products, payment, delivery, addr, x.get("token"));
                 } catch (Exception e) {
                     LoggerManager.i("OrderCreate:" + e.getMessage());
                     return "{\"msg\": \"请检查输入\",\"code\":-1014}";

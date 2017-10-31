@@ -5,10 +5,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONStringer;
-import org.json.JSONWriter;
+import org.json.*;
 import smart.server.DataService;
 import smart.server.ServiceRegistry;
 import smart.utils.core.LoggerManager;
@@ -124,7 +121,7 @@ public class OrderCreate{
             Transaction tx = DataService.getTransact(session);
             session.save(soe);
             tx.commit();
-            soe = findOEByUid(uid);
+            soe = findLastByUid(uid);
             if(soe.getId() > 0){
                 //ok
                 //DataService.finishUp(session,tx);
@@ -179,7 +176,7 @@ public class OrderCreate{
         }
          // 测试用
     }
-    public static SmartOrderEntity findOEByUid(int uid) throws HibernateException{
+    public static SmartOrderEntity findLastByUid(int uid) throws HibernateException{
         try {
             Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
@@ -253,15 +250,15 @@ public class OrderCreate{
     public static BigDecimal calcCommidityValue(int goods_id, int models, double quantity) {
         String url = ServiceRegistry.getUrl("commodity") + "?action=find_good&commodity="+goods_id;
         try {
-            String k = HttpsUtil.basicHttpPost(url,null);
-            JSONObject jsobj = new JSONObject(k);
+            String resposne = HttpsUtil.basicHttpPost(url,null);
+            JSONObject jsobj = new JSONObject(resposne);
             if(jsobj.getInt("code") == 1000){
-                BigDecimal subtotal = BigDecimal.ZERO;
-                subtotal = subtotal.add(BigDecimal.valueOf(jsobj.getDouble("price")));
-                subtotal = subtotal.multiply(BigDecimal.valueOf(quantity));
+                BigDecimal subTotal = BigDecimal.ZERO;
+                subTotal = subTotal.add(BigDecimal.valueOf(jsobj.getDouble("price")));
+                subTotal = subTotal.multiply(BigDecimal.valueOf(quantity));
                 // id + model -> 单价
                 // 单价 * quantity = 小计
-                return subtotal;
+                return subTotal;
             }else{
                 return BigDecimal.valueOf(-100000);
             }
@@ -273,10 +270,10 @@ public class OrderCreate{
         return BigDecimal.valueOf(-100000);
     }
 
-    public static String pasrseCreate(int uid, String products, int payment, int delivery, int delAddr, String token) {
-        JSONArray datas = new JSONArray(products);
-        if(datas != null){
-            SmartOrderEntity soe = initiate(datas,uid);
+    public static String parseCreate(int uid, String products, int payment, int delivery, int delAddr, String token) throws JSONException{
+        JSONArray productArray = new JSONArray(products);
+        if(productArray != null){
+            SmartOrderEntity soe = initiate(productArray,uid);
             if(soe == null){
                 return "{\"msg\": \"无法计算商品价格\",\"code\":-6015}";
             }
