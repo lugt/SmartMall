@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import org.json.JSONObject;
 import smart.server.IServiceProvider;
 import smart.server.ServiceRegistry;
+import smart.utils.core.LoggerManager;
 import smart.utils.data.HttpsUtil;
 import smart.utils.data.UrlEncode;
 
@@ -36,6 +37,7 @@ public class ServiceProvider implements IServiceProvider {
         try {
             String token = x.get("token");
             String userInfo = HttpsUtil.basicHttpPost(ServiceRegistry.getUrl("users") + "?action=oauth&token="+token,null);
+            LoggerManager.i(userInfo);
             JSONObject jsob = new JSONObject(userInfo);
             uid = jsob.getInt("uid");
         }catch (Exception e){

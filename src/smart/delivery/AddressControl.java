@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.json.JSONObject;
 import smart.server.DataService;
+import smart.utils.core.LoggerManager;
 import smart.utils.data.SmartDeliveryAddrEntity;
 import smart.utils.data.SmartUserAddrsEntity;
 
@@ -68,11 +69,10 @@ public class AddressControl {
         try{
             Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
-
+            LoggerManager.i("Saving User Addr : addr1 : "+addr1+" , uid - " + uid);
             Query q = session.createQuery("from SmartUserAddrsEntity where uid=:uu");
             q.setParameter("uu",uid);
             q.setMaxResults(1);
-
             SmartUserAddrsEntity suae = (SmartUserAddrsEntity) q.uniqueResult();
             if(suae == null || suae.getUid() < 1) {
                 suae = new SmartUserAddrsEntity();
@@ -80,7 +80,10 @@ public class AddressControl {
                 suae.setAddr1(0);
                 suae.setAddr2(0);suae.setAddr3(0);suae.setAddr4(0);suae.setAddr5(0);suae.setAddr6(0);suae.setAddr7(0);
                 suae.setAddr8(0);suae.setAddr9(0);suae.setDefaultaddr(0);
+            }else {
+                //LoggerManager.i("Recheck - Updating : suae.uid = " + suae.getUid());
             }
+
             if(addr1 != 0) {
                 suae.setAddr1(addr1);
                 suae.setDefaultaddr(addr1);

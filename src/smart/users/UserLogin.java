@@ -56,7 +56,7 @@ public class UserLogin {
                 udE.setSess(sess);
                 session.save(udE);
                 DataService.finishUp(session,tx);
-                LoginCache.currentUsers.put(sess,udE);
+                LoginCache.save(sess,udE);
                 return "{\"token\":\""+udE.getSess()+"\",\"code\":1000,\"uid\":"+udE.getUid()+"}";
             } else {
                 DataService.finishUp(session,tx);
