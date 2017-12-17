@@ -3,13 +3,11 @@ package smart.utils.data;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 @Table(name = "smart_order", schema = "smartmall", catalog = "")
 public class SmartOrderEntity {
-
-    @Id
-    @GeneratedValue
     private int id;
     private int userId;
     private int paymentId;
@@ -42,7 +40,7 @@ public class SmartOrderEntity {
     private byte type;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -52,7 +50,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "user_id")
     public int getUserId() {
         return userId;
     }
@@ -62,7 +60,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "payment_id", nullable = false)
+    @Column(name = "payment_id")
     public int getPaymentId() {
         return paymentId;
     }
@@ -72,7 +70,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "delivery_id", nullable = true)
+    @Column(name = "delivery_id")
     public Integer getDeliveryId() {
         return deliveryId;
     }
@@ -82,7 +80,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "merchandise", nullable = true, length = 300)
+    @Column(name = "merchandise")
     public String getMerchandise() {
         return merchandise;
     }
@@ -92,7 +90,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "status", nullable = true)
+    @Column(name = "status")
     public Byte getStatus() {
         return status;
     }
@@ -102,7 +100,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "pay_status", nullable = true)
+    @Column(name = "pay_status")
     public Byte getPayStatus() {
         return payStatus;
     }
@@ -112,7 +110,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "distribution_status", nullable = true)
+    @Column(name = "distribution_status")
     public Byte getDistributionStatus() {
         return distributionStatus;
     }
@@ -122,7 +120,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "due_amount", nullable = true, precision = 2)
+    @Column(name = "due_amount")
     public BigDecimal getDueAmount() {
         return dueAmount;
     }
@@ -132,7 +130,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "paid_amount", nullable = false, precision = 2)
+    @Column(name = "paid_amount")
     public BigDecimal getPaidAmount() {
         return paidAmount;
     }
@@ -142,7 +140,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "taxes", nullable = false, precision = 2)
+    @Column(name = "taxes")
     public BigDecimal getTaxes() {
         return taxes;
     }
@@ -152,7 +150,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "payable_freight", nullable = false, precision = 2)
+    @Column(name = "payable_freight")
     public BigDecimal getPayableFreight() {
         return payableFreight;
     }
@@ -162,7 +160,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "real_freight", nullable = false, precision = 2)
+    @Column(name = "real_freight")
     public BigDecimal getRealFreight() {
         return realFreight;
     }
@@ -172,7 +170,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "pay_fee", nullable = false, precision = 2)
+    @Column(name = "pay_fee")
     public BigDecimal getPayFee() {
         return payFee;
     }
@@ -182,7 +180,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "promotions", nullable = false, precision = 2)
+    @Column(name = "promotions")
     public BigDecimal getPromotions() {
         return promotions;
     }
@@ -192,7 +190,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "discount", nullable = false, precision = 2)
+    @Column(name = "discount")
     public BigDecimal getDiscount() {
         return discount;
     }
@@ -202,7 +200,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "order_amount", nullable = false, precision = 2)
+    @Column(name = "order_amount")
     public BigDecimal getOrderAmount() {
         return orderAmount;
     }
@@ -212,7 +210,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "pay_time", nullable = true)
+    @Column(name = "pay_time")
     public Timestamp getPayTime() {
         return payTime;
     }
@@ -222,7 +220,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "send_time", nullable = true)
+    @Column(name = "send_time")
     public Timestamp getSendTime() {
         return sendTime;
     }
@@ -232,7 +230,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "create_time", nullable = true)
+    @Column(name = "create_time")
     public Timestamp getCreateTime() {
         return createTime;
     }
@@ -242,7 +240,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "completion_time", nullable = true)
+    @Column(name = "completion_time")
     public Timestamp getCompletionTime() {
         return completionTime;
     }
@@ -252,7 +250,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "accept_time", nullable = true, length = 80)
+    @Column(name = "accept_time")
     public String getAcceptTime() {
         return acceptTime;
     }
@@ -262,7 +260,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "invoice", nullable = false)
+    @Column(name = "invoice")
     public byte getInvoice() {
         return invoice;
     }
@@ -272,7 +270,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "invoice_title", nullable = true, length = 100)
+    @Column(name = "invoice_title")
     public String getInvoiceTitle() {
         return invoiceTitle;
     }
@@ -282,7 +280,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "postscript", nullable = true, length = 255)
+    @Column(name = "postscript")
     public String getPostscript() {
         return postscript;
     }
@@ -292,7 +290,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "note", nullable = true, length = -1)
+    @Column(name = "note")
     public String getNote() {
         return note;
     }
@@ -302,7 +300,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "prop", nullable = true, length = 255)
+    @Column(name = "prop")
     public String getProp() {
         return prop;
     }
@@ -312,7 +310,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "exp", nullable = false)
+    @Column(name = "exp")
     public short getExp() {
         return exp;
     }
@@ -322,7 +320,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "point", nullable = false)
+    @Column(name = "point")
     public short getPoint() {
         return point;
     }
@@ -332,7 +330,7 @@ public class SmartOrderEntity {
     }
 
     @Basic
-    @Column(name = "type", nullable = false)
+    @Column(name = "type")
     public byte getType() {
         return type;
     }
@@ -345,78 +343,42 @@ public class SmartOrderEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         SmartOrderEntity that = (SmartOrderEntity) o;
-
-        if (id != that.id) return false;
-        if (userId != that.userId) return false;
-        if (paymentId != that.paymentId) return false;
-        if (invoice != that.invoice) return false;
-        if (exp != that.exp) return false;
-        if (point != that.point) return false;
-        if (type != that.type) return false;
-        if (deliveryId != null ? !deliveryId.equals(that.deliveryId) : that.deliveryId != null) return false;
-        if (merchandise != null ? !merchandise.equals(that.merchandise) : that.merchandise != null) return false;
-        if (status != null ? !status.equals(that.status) : that.status != null) return false;
-        if (payStatus != null ? !payStatus.equals(that.payStatus) : that.payStatus != null) return false;
-        if (distributionStatus != null ? !distributionStatus.equals(that.distributionStatus) : that.distributionStatus != null)
-            return false;
-        if (dueAmount != null ? !dueAmount.equals(that.dueAmount) : that.dueAmount != null) return false;
-        if (paidAmount != null ? !paidAmount.equals(that.paidAmount) : that.paidAmount != null) return false;
-        if (taxes != null ? !taxes.equals(that.taxes) : that.taxes != null) return false;
-        if (payableFreight != null ? !payableFreight.equals(that.payableFreight) : that.payableFreight != null)
-            return false;
-        if (realFreight != null ? !realFreight.equals(that.realFreight) : that.realFreight != null) return false;
-        if (payFee != null ? !payFee.equals(that.payFee) : that.payFee != null) return false;
-        if (promotions != null ? !promotions.equals(that.promotions) : that.promotions != null) return false;
-        if (discount != null ? !discount.equals(that.discount) : that.discount != null) return false;
-        if (orderAmount != null ? !orderAmount.equals(that.orderAmount) : that.orderAmount != null) return false;
-        if (payTime != null ? !payTime.equals(that.payTime) : that.payTime != null) return false;
-        if (sendTime != null ? !sendTime.equals(that.sendTime) : that.sendTime != null) return false;
-        if (createTime != null ? !createTime.equals(that.createTime) : that.createTime != null) return false;
-        if (completionTime != null ? !completionTime.equals(that.completionTime) : that.completionTime != null)
-            return false;
-        if (acceptTime != null ? !acceptTime.equals(that.acceptTime) : that.acceptTime != null) return false;
-        if (invoiceTitle != null ? !invoiceTitle.equals(that.invoiceTitle) : that.invoiceTitle != null) return false;
-        if (postscript != null ? !postscript.equals(that.postscript) : that.postscript != null) return false;
-        if (note != null ? !note.equals(that.note) : that.note != null) return false;
-        if (prop != null ? !prop.equals(that.prop) : that.prop != null) return false;
-
-        return true;
+        return id == that.id &&
+                userId == that.userId &&
+                paymentId == that.paymentId &&
+                invoice == that.invoice &&
+                exp == that.exp &&
+                point == that.point &&
+                type == that.type &&
+                Objects.equals(deliveryId, that.deliveryId) &&
+                Objects.equals(merchandise, that.merchandise) &&
+                Objects.equals(status, that.status) &&
+                Objects.equals(payStatus, that.payStatus) &&
+                Objects.equals(distributionStatus, that.distributionStatus) &&
+                Objects.equals(dueAmount, that.dueAmount) &&
+                Objects.equals(paidAmount, that.paidAmount) &&
+                Objects.equals(taxes, that.taxes) &&
+                Objects.equals(payableFreight, that.payableFreight) &&
+                Objects.equals(realFreight, that.realFreight) &&
+                Objects.equals(payFee, that.payFee) &&
+                Objects.equals(promotions, that.promotions) &&
+                Objects.equals(discount, that.discount) &&
+                Objects.equals(orderAmount, that.orderAmount) &&
+                Objects.equals(payTime, that.payTime) &&
+                Objects.equals(sendTime, that.sendTime) &&
+                Objects.equals(createTime, that.createTime) &&
+                Objects.equals(completionTime, that.completionTime) &&
+                Objects.equals(acceptTime, that.acceptTime) &&
+                Objects.equals(invoiceTitle, that.invoiceTitle) &&
+                Objects.equals(postscript, that.postscript) &&
+                Objects.equals(note, that.note) &&
+                Objects.equals(prop, that.prop);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + userId;
-        result = 31 * result + paymentId;
-        result = 31 * result + (deliveryId != null ? deliveryId.hashCode() : 0);
-        result = 31 * result + (merchandise != null ? merchandise.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        result = 31 * result + (payStatus != null ? payStatus.hashCode() : 0);
-        result = 31 * result + (distributionStatus != null ? distributionStatus.hashCode() : 0);
-        result = 31 * result + (dueAmount != null ? dueAmount.hashCode() : 0);
-        result = 31 * result + (paidAmount != null ? paidAmount.hashCode() : 0);
-        result = 31 * result + (taxes != null ? taxes.hashCode() : 0);
-        result = 31 * result + (payableFreight != null ? payableFreight.hashCode() : 0);
-        result = 31 * result + (realFreight != null ? realFreight.hashCode() : 0);
-        result = 31 * result + (payFee != null ? payFee.hashCode() : 0);
-        result = 31 * result + (promotions != null ? promotions.hashCode() : 0);
-        result = 31 * result + (discount != null ? discount.hashCode() : 0);
-        result = 31 * result + (orderAmount != null ? orderAmount.hashCode() : 0);
-        result = 31 * result + (payTime != null ? payTime.hashCode() : 0);
-        result = 31 * result + (sendTime != null ? sendTime.hashCode() : 0);
-        result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
-        result = 31 * result + (completionTime != null ? completionTime.hashCode() : 0);
-        result = 31 * result + (acceptTime != null ? acceptTime.hashCode() : 0);
-        result = 31 * result + (int) invoice;
-        result = 31 * result + (invoiceTitle != null ? invoiceTitle.hashCode() : 0);
-        result = 31 * result + (postscript != null ? postscript.hashCode() : 0);
-        result = 31 * result + (note != null ? note.hashCode() : 0);
-        result = 31 * result + (prop != null ? prop.hashCode() : 0);
-        result = 31 * result + (int) exp;
-        result = 31 * result + (int) point;
-        result = 31 * result + (int) type;
-        return result;
+
+        return Objects.hash(id, userId, paymentId, deliveryId, merchandise, status, payStatus, distributionStatus, dueAmount, paidAmount, taxes, payableFreight, realFreight, payFee, promotions, discount, orderAmount, payTime, sendTime, createTime, completionTime, acceptTime, invoice, invoiceTitle, postscript, note, prop, exp, point, type);
     }
 }

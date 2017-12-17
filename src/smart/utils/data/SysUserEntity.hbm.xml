@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="smart.utils.data.SysUserEntity" table="sys_user" schema="smartmall">
+        <id name="userNo" column="user_no"/>
+        <property name="userLoginName" column="user_login_name"/>
+        <property name="password" column="password"/>
+        <property name="userName" column="user_name"/>
+        <property name="userNameEn" column="user_name_en"/>
+        <property name="mobilePhone" column="mobile_phone"/>
+        <property name="pCode" column="p_code"/>
+        <property name="deptId" column="dept_id"/>
+        <property name="deptName" column="dept_name"/>
+        <property name="status" column="status"/>
+        <property name="gender" column="gender"/>
+        <property name="crewType" column="crew_type"/>
+        <property name="createdOn" column="created_on"/>
+        <property name="createdBy" column="created_by"/>
+        <property name="modifiedOn" column="modified_on"/>
+        <property name="modifiedBy" column="modified_by"/>
+    </class>
+</hibernate-mapping>

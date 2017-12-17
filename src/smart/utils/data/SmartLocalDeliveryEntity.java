@@ -1,12 +1,11 @@
 package smart.utils.data;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "smart_local_delivery", schema = "smartmall", catalog = "")
 public class SmartLocalDeliveryEntity {
-    @Id
-    @GeneratedValue
     private int deliverid;
     private Integer orderid;
     private int uid;
@@ -23,7 +22,7 @@ public class SmartLocalDeliveryEntity {
     private String logs;
 
     @Id
-    @Column(name = "deliverid", nullable = false)
+    @Column(name = "deliverid")
     public int getDeliverid() {
         return deliverid;
     }
@@ -33,7 +32,7 @@ public class SmartLocalDeliveryEntity {
     }
 
     @Basic
-    @Column(name = "orderid", nullable = true)
+    @Column(name = "orderid")
     public Integer getOrderid() {
         return orderid;
     }
@@ -43,7 +42,7 @@ public class SmartLocalDeliveryEntity {
     }
 
     @Basic
-    @Column(name = "uid", nullable = false)
+    @Column(name = "uid")
     public int getUid() {
         return uid;
     }
@@ -53,7 +52,7 @@ public class SmartLocalDeliveryEntity {
     }
 
     @Basic
-    @Column(name = "type", nullable = true)
+    @Column(name = "type")
     public Integer getType() {
         return type;
     }
@@ -63,7 +62,7 @@ public class SmartLocalDeliveryEntity {
     }
 
     @Basic
-    @Column(name = "status", nullable = true)
+    @Column(name = "status")
     public Integer getStatus() {
         return status;
     }
@@ -73,7 +72,7 @@ public class SmartLocalDeliveryEntity {
     }
 
     @Basic
-    @Column(name = "sender", nullable = true, length = -1)
+    @Column(name = "sender")
     public String getSender() {
         return sender;
     }
@@ -83,7 +82,7 @@ public class SmartLocalDeliveryEntity {
     }
 
     @Basic
-    @Column(name = "address", nullable = true)
+    @Column(name = "address")
     public Integer getAddress() {
         return address;
     }
@@ -93,7 +92,7 @@ public class SmartLocalDeliveryEntity {
     }
 
     @Basic
-    @Column(name = "carrier", nullable = true, length = -1)
+    @Column(name = "carrier")
     public String getCarrier() {
         return carrier;
     }
@@ -103,7 +102,7 @@ public class SmartLocalDeliveryEntity {
     }
 
     @Basic
-    @Column(name = "starttime", nullable = true)
+    @Column(name = "starttime")
     public Integer getStarttime() {
         return starttime;
     }
@@ -113,7 +112,7 @@ public class SmartLocalDeliveryEntity {
     }
 
     @Basic
-    @Column(name = "reservetime", nullable = true)
+    @Column(name = "reservetime")
     public Integer getReservetime() {
         return reservetime;
     }
@@ -123,7 +122,7 @@ public class SmartLocalDeliveryEntity {
     }
 
     @Basic
-    @Column(name = "packagetime", nullable = true)
+    @Column(name = "packagetime")
     public Integer getPackagetime() {
         return packagetime;
     }
@@ -133,7 +132,7 @@ public class SmartLocalDeliveryEntity {
     }
 
     @Basic
-    @Column(name = "accepttime", nullable = true)
+    @Column(name = "accepttime")
     public Integer getAccepttime() {
         return accepttime;
     }
@@ -143,7 +142,7 @@ public class SmartLocalDeliveryEntity {
     }
 
     @Basic
-    @Column(name = "confirmtime", nullable = true)
+    @Column(name = "confirmtime")
     public Integer getConfirmtime() {
         return confirmtime;
     }
@@ -153,7 +152,7 @@ public class SmartLocalDeliveryEntity {
     }
 
     @Basic
-    @Column(name = "logs", nullable = true, length = -1)
+    @Column(name = "logs")
     public String getLogs() {
         return logs;
     }
@@ -166,43 +165,26 @@ public class SmartLocalDeliveryEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         SmartLocalDeliveryEntity that = (SmartLocalDeliveryEntity) o;
-
-        if (deliverid != that.deliverid) return false;
-        if (uid != that.uid) return false;
-        if (orderid != null ? !orderid.equals(that.orderid) : that.orderid != null) return false;
-        if (type != null ? !type.equals(that.type) : that.type != null) return false;
-        if (status != null ? !status.equals(that.status) : that.status != null) return false;
-        if (sender != null ? !sender.equals(that.sender) : that.sender != null) return false;
-        if (address != null ? !address.equals(that.address) : that.address != null) return false;
-        if (carrier != null ? !carrier.equals(that.carrier) : that.carrier != null) return false;
-        if (starttime != null ? !starttime.equals(that.starttime) : that.starttime != null) return false;
-        if (reservetime != null ? !reservetime.equals(that.reservetime) : that.reservetime != null) return false;
-        if (packagetime != null ? !packagetime.equals(that.packagetime) : that.packagetime != null) return false;
-        if (accepttime != null ? !accepttime.equals(that.accepttime) : that.accepttime != null) return false;
-        if (confirmtime != null ? !confirmtime.equals(that.confirmtime) : that.confirmtime != null) return false;
-        if (logs != null ? !logs.equals(that.logs) : that.logs != null) return false;
-
-        return true;
+        return deliverid == that.deliverid &&
+                uid == that.uid &&
+                Objects.equals(orderid, that.orderid) &&
+                Objects.equals(type, that.type) &&
+                Objects.equals(status, that.status) &&
+                Objects.equals(sender, that.sender) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(carrier, that.carrier) &&
+                Objects.equals(starttime, that.starttime) &&
+                Objects.equals(reservetime, that.reservetime) &&
+                Objects.equals(packagetime, that.packagetime) &&
+                Objects.equals(accepttime, that.accepttime) &&
+                Objects.equals(confirmtime, that.confirmtime) &&
+                Objects.equals(logs, that.logs);
     }
 
     @Override
     public int hashCode() {
-        int result = deliverid;
-        result = 31 * result + (orderid != null ? orderid.hashCode() : 0);
-        result = 31 * result + uid;
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        result = 31 * result + (sender != null ? sender.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (carrier != null ? carrier.hashCode() : 0);
-        result = 31 * result + (starttime != null ? starttime.hashCode() : 0);
-        result = 31 * result + (reservetime != null ? reservetime.hashCode() : 0);
-        result = 31 * result + (packagetime != null ? packagetime.hashCode() : 0);
-        result = 31 * result + (accepttime != null ? accepttime.hashCode() : 0);
-        result = 31 * result + (confirmtime != null ? confirmtime.hashCode() : 0);
-        result = 31 * result + (logs != null ? logs.hashCode() : 0);
-        return result;
+
+        return Objects.hash(deliverid, orderid, uid, type, status, sender, address, carrier, starttime, reservetime, packagetime, accepttime, confirmtime, logs);
     }
 }

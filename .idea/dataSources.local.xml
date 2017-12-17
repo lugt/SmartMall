@@ -9,12 +9,12 @@
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
       <user-name>mihe</user-name>
     </data-source>
-    <data-source name="smartmall@localhost" uuid="aa68e1eb-60ed-4df4-bab2-9da98199dd8e">
-      <database-info product="MySQL" version="5.5.20" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+    <data-source name="smartmall@north.niimei.com" uuid="aa68e1eb-60ed-4df4-bab2-9da98199dd8e">
+      <database-info product="MySQL" version="5.5.56-MariaDB" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.44 ( Revision: b3cda4f864902ffdde495b9df93937c3e20009be )">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
       </database-info>
-      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>smartmall</user-name>
       <introspection-schemas>*:smartmall</introspection-schemas>

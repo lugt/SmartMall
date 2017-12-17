@@ -26,11 +26,11 @@
         </library>
       </libraries>
     </data-source>
-    <data-source source="LOCAL" name="smartmall@localhost" uuid="aa68e1eb-60ed-4df4-bab2-9da98199dd8e">
+    <data-source source="LOCAL" name="smartmall@north.niimei.com" uuid="aa68e1eb-60ed-4df4-bab2-9da98199dd8e">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/smartmall</jdbc-url>
+      <jdbc-url>jdbc:mysql://north.niimei.com:3306/smartmall</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />

@@ -3,12 +3,11 @@ package smart.utils.data;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 @Table(name = "smart_goods", schema = "smartmall", catalog = "")
 public class SmartGoodsEntity {
-    @Id
-    @GeneratedValue
     private int goodid;
     private String name;
     private String goodsNo;
@@ -39,7 +38,7 @@ public class SmartGoodsEntity {
     private short exp;
 
     @Id
-    @Column(name = "goodid", nullable = false)
+    @Column(name = "goodid")
     public int getGoodid() {
         return goodid;
     }
@@ -49,7 +48,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -59,7 +58,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "goods_no", nullable = false, length = 20)
+    @Column(name = "goods_no")
     public String getGoodsNo() {
         return goodsNo;
     }
@@ -69,7 +68,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "model_id", nullable = false)
+    @Column(name = "model_id")
     public int getModelId() {
         return modelId;
     }
@@ -79,7 +78,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "sell_price", nullable = false, precision = 2)
+    @Column(name = "sell_price")
     public BigDecimal getSellPrice() {
         return sellPrice;
     }
@@ -89,7 +88,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "market_price", nullable = true, precision = 2)
+    @Column(name = "market_price")
     public BigDecimal getMarketPrice() {
         return marketPrice;
     }
@@ -99,7 +98,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "cost_price", nullable = true, precision = 2)
+    @Column(name = "cost_price")
     public BigDecimal getCostPrice() {
         return costPrice;
     }
@@ -109,7 +108,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "up_time", nullable = true)
+    @Column(name = "up_time")
     public Timestamp getUpTime() {
         return upTime;
     }
@@ -119,7 +118,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "down_time", nullable = true)
+    @Column(name = "down_time")
     public Timestamp getDownTime() {
         return downTime;
     }
@@ -129,7 +128,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "create_time", nullable = false)
+    @Column(name = "create_time")
     public Timestamp getCreateTime() {
         return createTime;
     }
@@ -139,7 +138,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "store_nums", nullable = false)
+    @Column(name = "store_nums")
     public int getStoreNums() {
         return storeNums;
     }
@@ -149,7 +148,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "img", nullable = true, length = 255)
+    @Column(name = "img")
     public String getImg() {
         return img;
     }
@@ -159,7 +158,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "is_del", nullable = false)
+    @Column(name = "is_del")
     public byte getIsDel() {
         return isDel;
     }
@@ -169,7 +168,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "content", nullable = true, length = -1)
+    @Column(name = "content")
     public String getContent() {
         return content;
     }
@@ -179,7 +178,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "keywords", nullable = true, length = 255)
+    @Column(name = "keywords")
     public String getKeywords() {
         return keywords;
     }
@@ -189,7 +188,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "description", nullable = true, length = 255)
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -199,7 +198,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "search_words", nullable = true, length = -1)
+    @Column(name = "search_words")
     public String getSearchWords() {
         return searchWords;
     }
@@ -209,7 +208,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "weight", nullable = false, precision = 2)
+    @Column(name = "weight")
     public BigDecimal getWeight() {
         return weight;
     }
@@ -219,7 +218,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "point", nullable = false)
+    @Column(name = "point")
     public int getPoint() {
         return point;
     }
@@ -229,7 +228,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "unit", nullable = true, length = 10)
+    @Column(name = "unit")
     public String getUnit() {
         return unit;
     }
@@ -239,7 +238,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "brand_id", nullable = true)
+    @Column(name = "brand_id")
     public Integer getBrandId() {
         return brandId;
     }
@@ -249,7 +248,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "visit", nullable = false)
+    @Column(name = "visit")
     public int getVisit() {
         return visit;
     }
@@ -259,7 +258,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "favorite", nullable = false)
+    @Column(name = "favorite")
     public int getFavorite() {
         return favorite;
     }
@@ -269,7 +268,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "sort", nullable = false)
+    @Column(name = "sort")
     public short getSort() {
         return sort;
     }
@@ -279,7 +278,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "list_img", nullable = true, length = 255)
+    @Column(name = "list_img")
     public String getListImg() {
         return listImg;
     }
@@ -289,7 +288,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "small_img", nullable = true, length = 255)
+    @Column(name = "small_img")
     public String getSmallImg() {
         return smallImg;
     }
@@ -299,7 +298,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "spec_array", nullable = true, length = -1)
+    @Column(name = "spec_array")
     public String getSpecArray() {
         return specArray;
     }
@@ -309,7 +308,7 @@ public class SmartGoodsEntity {
     }
 
     @Basic
-    @Column(name = "exp", nullable = false)
+    @Column(name = "exp")
     public short getExp() {
         return exp;
     }
@@ -322,71 +321,40 @@ public class SmartGoodsEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         SmartGoodsEntity that = (SmartGoodsEntity) o;
-
-        if (goodid != that.goodid) return false;
-        if (modelId != that.modelId) return false;
-        if (storeNums != that.storeNums) return false;
-        if (isDel != that.isDel) return false;
-        if (point != that.point) return false;
-        if (visit != that.visit) return false;
-        if (favorite != that.favorite) return false;
-        if (sort != that.sort) return false;
-        if (exp != that.exp) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (goodsNo != null ? !goodsNo.equals(that.goodsNo) : that.goodsNo != null) return false;
-        if (sellPrice != null ? !sellPrice.equals(that.sellPrice) : that.sellPrice != null) return false;
-        if (marketPrice != null ? !marketPrice.equals(that.marketPrice) : that.marketPrice != null) return false;
-        if (costPrice != null ? !costPrice.equals(that.costPrice) : that.costPrice != null) return false;
-        if (upTime != null ? !upTime.equals(that.upTime) : that.upTime != null) return false;
-        if (downTime != null ? !downTime.equals(that.downTime) : that.downTime != null) return false;
-        if (createTime != null ? !createTime.equals(that.createTime) : that.createTime != null) return false;
-        if (img != null ? !img.equals(that.img) : that.img != null) return false;
-        if (content != null ? !content.equals(that.content) : that.content != null) return false;
-        if (keywords != null ? !keywords.equals(that.keywords) : that.keywords != null) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (searchWords != null ? !searchWords.equals(that.searchWords) : that.searchWords != null) return false;
-        if (weight != null ? !weight.equals(that.weight) : that.weight != null) return false;
-        if (unit != null ? !unit.equals(that.unit) : that.unit != null) return false;
-        if (brandId != null ? !brandId.equals(that.brandId) : that.brandId != null) return false;
-        if (listImg != null ? !listImg.equals(that.listImg) : that.listImg != null) return false;
-        if (smallImg != null ? !smallImg.equals(that.smallImg) : that.smallImg != null) return false;
-        if (specArray != null ? !specArray.equals(that.specArray) : that.specArray != null) return false;
-
-        return true;
+        return goodid == that.goodid &&
+                modelId == that.modelId &&
+                storeNums == that.storeNums &&
+                isDel == that.isDel &&
+                point == that.point &&
+                visit == that.visit &&
+                favorite == that.favorite &&
+                sort == that.sort &&
+                exp == that.exp &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(goodsNo, that.goodsNo) &&
+                Objects.equals(sellPrice, that.sellPrice) &&
+                Objects.equals(marketPrice, that.marketPrice) &&
+                Objects.equals(costPrice, that.costPrice) &&
+                Objects.equals(upTime, that.upTime) &&
+                Objects.equals(downTime, that.downTime) &&
+                Objects.equals(createTime, that.createTime) &&
+                Objects.equals(img, that.img) &&
+                Objects.equals(content, that.content) &&
+                Objects.equals(keywords, that.keywords) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(searchWords, that.searchWords) &&
+                Objects.equals(weight, that.weight) &&
+                Objects.equals(unit, that.unit) &&
+                Objects.equals(brandId, that.brandId) &&
+                Objects.equals(listImg, that.listImg) &&
+                Objects.equals(smallImg, that.smallImg) &&
+                Objects.equals(specArray, that.specArray);
     }
 
     @Override
     public int hashCode() {
-        int result = goodid;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (goodsNo != null ? goodsNo.hashCode() : 0);
-        result = 31 * result + modelId;
-        result = 31 * result + (sellPrice != null ? sellPrice.hashCode() : 0);
-        result = 31 * result + (marketPrice != null ? marketPrice.hashCode() : 0);
-        result = 31 * result + (costPrice != null ? costPrice.hashCode() : 0);
-        result = 31 * result + (upTime != null ? upTime.hashCode() : 0);
-        result = 31 * result + (downTime != null ? downTime.hashCode() : 0);
-        result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
-        result = 31 * result + storeNums;
-        result = 31 * result + (img != null ? img.hashCode() : 0);
-        result = 31 * result + (int) isDel;
-        result = 31 * result + (content != null ? content.hashCode() : 0);
-        result = 31 * result + (keywords != null ? keywords.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (searchWords != null ? searchWords.hashCode() : 0);
-        result = 31 * result + (weight != null ? weight.hashCode() : 0);
-        result = 31 * result + point;
-        result = 31 * result + (unit != null ? unit.hashCode() : 0);
-        result = 31 * result + (brandId != null ? brandId.hashCode() : 0);
-        result = 31 * result + visit;
-        result = 31 * result + favorite;
-        result = 31 * result + (int) sort;
-        result = 31 * result + (listImg != null ? listImg.hashCode() : 0);
-        result = 31 * result + (smallImg != null ? smallImg.hashCode() : 0);
-        result = 31 * result + (specArray != null ? specArray.hashCode() : 0);
-        result = 31 * result + (int) exp;
-        return result;
+
+        return Objects.hash(goodid, name, goodsNo, modelId, sellPrice, marketPrice, costPrice, upTime, downTime, createTime, storeNums, img, isDel, content, keywords, description, searchWords, weight, point, unit, brandId, visit, favorite, sort, listImg, smallImg, specArray, exp);
     }
 }

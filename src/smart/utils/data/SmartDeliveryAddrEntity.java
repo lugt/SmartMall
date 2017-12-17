@@ -1,26 +1,24 @@
 package smart.utils.data;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "smart_delivery_addr", schema = "smartmall", catalog = "")
 public class SmartDeliveryAddrEntity {
-    @Id
-    @GeneratedValue
     private int addrid;
     private Integer uid;
     private Long mobile;
-    private Serializable addr;
-    private Serializable memo;
-    private Serializable recver;
+    private String recver;
     private Integer type;
     private Integer province;
-    private Integer district;
     private Integer city;
+    private Integer district;
+    private String addr;
+    private String memo;
 
     @Id
-    @Column(name = "addrid", nullable = false)
+    @Column(name = "addrid")
     public int getAddrid() {
         return addrid;
     }
@@ -30,7 +28,7 @@ public class SmartDeliveryAddrEntity {
     }
 
     @Basic
-    @Column(name = "uid", nullable = true)
+    @Column(name = "uid")
     public Integer getUid() {
         return uid;
     }
@@ -40,7 +38,7 @@ public class SmartDeliveryAddrEntity {
     }
 
     @Basic
-    @Column(name = "mobile", nullable = true)
+    @Column(name = "mobile")
     public Long getMobile() {
         return mobile;
     }
@@ -50,37 +48,17 @@ public class SmartDeliveryAddrEntity {
     }
 
     @Basic
-    @Column(name = "addr", nullable = false, length = -1)
-    public Serializable getAddr() {
-        return addr;
-    }
-
-    public void setAddr(Serializable addr) {
-        this.addr = addr;
-    }
-
-    @Basic
-    @Column(name = "memo", nullable = true, length = -1)
-    public Serializable getMemo() {
-        return memo;
-    }
-
-    public void setMemo(Serializable memo) {
-        this.memo = memo;
-    }
-
-    @Basic
-    @Column(name = "recver", nullable = true, length = -1)
-    public Serializable getRecver() {
+    @Column(name = "recver")
+    public String getRecver() {
         return recver;
     }
 
-    public void setRecver(Serializable recver) {
+    public void setRecver(String recver) {
         this.recver = recver;
     }
 
     @Basic
-    @Column(name = "type", nullable = true)
+    @Column(name = "type")
     public Integer getType() {
         return type;
     }
@@ -90,7 +68,7 @@ public class SmartDeliveryAddrEntity {
     }
 
     @Basic
-    @Column(name = "province", nullable = true)
+    @Column(name = "province")
     public Integer getProvince() {
         return province;
     }
@@ -100,7 +78,17 @@ public class SmartDeliveryAddrEntity {
     }
 
     @Basic
-    @Column(name = "district", nullable = true)
+    @Column(name = "city")
+    public Integer getCity() {
+        return city;
+    }
+
+    public void setCity(Integer city) {
+        this.city = city;
+    }
+
+    @Basic
+    @Column(name = "district")
     public Integer getDistrict() {
         return district;
     }
@@ -110,48 +98,45 @@ public class SmartDeliveryAddrEntity {
     }
 
     @Basic
-    @Column(name = "city", nullable = true)
-    public Integer getCity() {
-        return city;
+    @Column(name = "addr")
+    public String getAddr() {
+        return addr;
     }
 
-    public void setCity(Integer city) {
-        this.city = city;
+    public void setAddr(String addr) {
+        this.addr = addr;
+    }
+
+    @Basic
+    @Column(name = "memo")
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         SmartDeliveryAddrEntity that = (SmartDeliveryAddrEntity) o;
-
-        if (addrid != that.addrid) return false;
-        if (uid != null ? !uid.equals(that.uid) : that.uid != null) return false;
-        if (mobile != null ? !mobile.equals(that.mobile) : that.mobile != null) return false;
-        if (addr != null ? !addr.equals(that.addr) : that.addr != null) return false;
-        if (memo != null ? !memo.equals(that.memo) : that.memo != null) return false;
-        if (recver != null ? !recver.equals(that.recver) : that.recver != null) return false;
-        if (type != null ? !type.equals(that.type) : that.type != null) return false;
-        if (province != null ? !province.equals(that.province) : that.province != null) return false;
-        if (district != null ? !district.equals(that.district) : that.district != null) return false;
-        if (city != null ? !city.equals(that.city) : that.city != null) return false;
-
-        return true;
+        return addrid == that.addrid &&
+                Objects.equals(uid, that.uid) &&
+                Objects.equals(mobile, that.mobile) &&
+                Objects.equals(recver, that.recver) &&
+                Objects.equals(type, that.type) &&
+                Objects.equals(province, that.province) &&
+                Objects.equals(city, that.city) &&
+                Objects.equals(district, that.district) &&
+                Objects.equals(addr, that.addr) &&
+                Objects.equals(memo, that.memo);
     }
 
     @Override
     public int hashCode() {
-        int result = addrid;
-        result = 31 * result + (uid != null ? uid.hashCode() : 0);
-        result = 31 * result + (mobile != null ? mobile.hashCode() : 0);
-        result = 31 * result + (addr != null ? addr.hashCode() : 0);
-        result = 31 * result + (memo != null ? memo.hashCode() : 0);
-        result = 31 * result + (recver != null ? recver.hashCode() : 0);
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (province != null ? province.hashCode() : 0);
-        result = 31 * result + (district != null ? district.hashCode() : 0);
-        result = 31 * result + (city != null ? city.hashCode() : 0);
-        return result;
+
+        return Objects.hash(addrid, uid, mobile, recver, type, province, city, district, addr, memo);
     }
 }

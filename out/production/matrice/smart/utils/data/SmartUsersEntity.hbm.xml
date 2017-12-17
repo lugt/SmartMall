@@ -5,32 +5,14 @@
 <hibernate-mapping>
 
     <class name="smart.utils.data.SmartUsersEntity" table="smart_users" schema="smartmall">
-        <id name="uid">
-            <column name="uid" sql-type="int(11)"/>
-        </id>
-        <property name="usn">
-            <column name="usn" sql-type="varchar(40)" length="40"/>
-        </property>
-        <property name="pss">
-            <column name="pss" sql-type="tinytext"/>
-        </property>
-        <property name="name">
-            <column name="name" sql-type="tinytext" />
-        </property>
-        <property name="title">
-            <column name="title" sql-type="tinytext" />
-        </property>
-        <property name="priv">
-            <column name="priv" sql-type="tinytext"/>
-        </property>
-        <property name="state">
-            <column name="state" sql-type="int(11)"/>
-        </property>
-        <property name="sess">
-            <column name="sess" sql-type="tinytext"/>
-        </property>
-        <property name="phone">
-            <column name="phone" sql-type="tinytext"/>
-        </property>
+        <id name="uid" column="uid"/>
+        <property name="usn" column="usn"/>
+        <property name="pss" column="pss"/>
+        <property name="name" column="name"/>
+        <property name="title" column="title"/>
+        <property name="priv" column="priv"/>
+        <property name="state" column="state"/>
+        <property name="sess" column="sess"/>
+        <property name="phone" column="phone"/>
     </class>
 </hibernate-mapping>

@@ -5,90 +5,33 @@
 <hibernate-mapping>
 
     <class name="smart.utils.data.SmartGoodsEntity" table="smart_goods" schema="smartmall">
-        <id name="goodid">
-            <column name="goodid" sql-type="int(10) unsigned"/>
-            <generator class="native" />
-        </id>
-        <property name="name">
-            <column name="name" sql-type="varchar(50)" length="50"/>
-        </property>
-        <property name="goodsNo">
-            <column name="goods_no" sql-type="varchar(20)" length="20"/>
-        </property>
-        <property name="modelId">
-            <column name="model_id" sql-type="int(11) unsigned"/>
-        </property>
-        <property name="sellPrice">
-            <column name="sell_price" sql-type="decimal(15,2)" precision="15" scale="2"/>
-        </property>
-        <property name="marketPrice">
-            <column name="market_price" sql-type="decimal(15,2)" precision="15" scale="2" not-null="true"/>
-        </property>
-        <property name="costPrice">
-            <column name="cost_price" sql-type="decimal(15,2)" precision="15" scale="2" not-null="true"/>
-        </property>
-        <property name="upTime">
-            <column name="up_time" sql-type="datetime" not-null="true"/>
-        </property>
-        <property name="downTime">
-            <column name="down_time" sql-type="datetime" not-null="true"/>
-        </property>
-        <property name="createTime">
-            <column name="create_time" sql-type="datetime"/>
-        </property>
-        <property name="storeNums">
-            <column name="store_nums" sql-type="int(11)"/>
-        </property>
-        <property name="img">
-            <column name="img" sql-type="varchar(255)" not-null="true"/>
-        </property>
-        <property name="isDel">
-            <column name="is_del" sql-type="tinyint(1)"/>
-        </property>
-        <property name="content">
-            <column name="content" sql-type="text" not-null="true"/>
-        </property>
-        <property name="keywords">
-            <column name="keywords" sql-type="varchar(255)" not-null="true"/>
-        </property>
-        <property name="description">
-            <column name="description" sql-type="varchar(255)" not-null="true"/>
-        </property>
-        <property name="searchWords">
-            <column name="search_words" sql-type="text" not-null="true"/>
-        </property>
-        <property name="weight">
-            <column name="weight" sql-type="decimal(15,2)" precision="15" scale="2"/>
-        </property>
-        <property name="point">
-            <column name="point" sql-type="int(11)"/>
-        </property>
-        <property name="unit">
-            <column name="unit" sql-type="varchar(10)" length="10" not-null="true"/>
-        </property>
-        <property name="brandId">
-            <column name="brand_id" sql-type="int(11)" not-null="true"/>
-        </property>
-        <property name="visit">
-            <column name="visit" sql-type="int(11)"/>
-        </property>
-        <property name="favorite">
-            <column name="favorite" sql-type="int(11)"/>
-        </property>
-        <property name="sort">
-            <column name="sort" sql-type="smallint(5)"/>
-        </property>
-        <property name="listImg">
-            <column name="list_img" sql-type="varchar(255)" not-null="true"/>
-        </property>
-        <property name="smallImg">
-            <column name="small_img" sql-type="varchar(255)" not-null="true"/>
-        </property>
-        <property name="specArray">
-            <column name="spec_array" sql-type="text" not-null="true"/>
-        </property>
-        <property name="exp">
-            <column name="exp" sql-type="smallint(5)"/>
-        </property>
+        <id name="goodid" column="goodid"/>
+        <property name="name" column="name"/>
+        <property name="goodsNo" column="goods_no"/>
+        <property name="modelId" column="model_id"/>
+        <property name="sellPrice" column="sell_price"/>
+        <property name="marketPrice" column="market_price"/>
+        <property name="costPrice" column="cost_price"/>
+        <property name="upTime" column="up_time"/>
+        <property name="downTime" column="down_time"/>
+        <property name="createTime" column="create_time"/>
+        <property name="storeNums" column="store_nums"/>
+        <property name="img" column="img"/>
+        <property name="isDel" column="is_del"/>
+        <property name="content" column="content"/>
+        <property name="keywords" column="keywords"/>
+        <property name="description" column="description"/>
+        <property name="searchWords" column="search_words"/>
+        <property name="weight" column="weight"/>
+        <property name="point" column="point"/>
+        <property name="unit" column="unit"/>
+        <property name="brandId" column="brand_id"/>
+        <property name="visit" column="visit"/>
+        <property name="favorite" column="favorite"/>
+        <property name="sort" column="sort"/>
+        <property name="listImg" column="list_img"/>
+        <property name="smallImg" column="small_img"/>
+        <property name="specArray" column="spec_array"/>
+        <property name="exp" column="exp"/>
     </class>
 </hibernate-mapping>

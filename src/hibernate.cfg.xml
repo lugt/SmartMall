@@ -6,7 +6,7 @@
     <session-factory>
 
         <property name="connection.autocommit">true</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/smartmall</property>
+        <property name="connection.url">jdbc:mysql://north.niimei.com:3306/smartmall</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection_provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
 
@@ -20,19 +20,20 @@
 
         <property name="c3p0.timeout">5</property>
         <property name="c3p0.idle_test_period">30</property>
-
         <mapping resource="smart/utils/data/SmartDeliveryAddrEntity.hbm.xml"/>
-        <mapping resource="smart/utils/data/SmartUsersEntity.hbm.xml"/>
-        <mapping class="smart.utils.data.SmartUsersEntity"/>
-        <mapping class="smart.utils.data.SmartLocalDeliveryEntity"/>
-        <mapping resource="smart/utils/data/SmartLocalDeliveryEntity.hbm.xml"/>
         <mapping class="smart.utils.data.SmartDeliveryAddrEntity"/>
-        <mapping class="smart.utils.data.SmartGoodsEntity"/>
         <mapping resource="smart/utils/data/SmartGoodsEntity.hbm.xml"/>
-        <mapping class="smart.utils.data.SmartUserAddrsEntity"/>
-        <mapping resource="smart/utils/data/SmartUserAddrsEntity.hbm.xml"/>
+        <mapping class="smart.utils.data.SmartGoodsEntity"/>
+        <mapping resource="smart/utils/data/SmartLocalDeliveryEntity.hbm.xml"/>
+        <mapping class="smart.utils.data.SmartLocalDeliveryEntity"/>
         <mapping resource="smart/utils/data/SmartOrderEntity.hbm.xml"/>
         <mapping class="smart.utils.data.SmartOrderEntity"/>
+        <mapping resource="smart/utils/data/SmartUserAddrsEntity.hbm.xml"/>
+        <mapping class="smart.utils.data.SmartUserAddrsEntity"/>
+        <mapping resource="smart/utils/data/SmartUsersEntity.hbm.xml"/>
+        <mapping class="smart.utils.data.SmartUsersEntity"/>
+        <mapping resource="smart/utils/data/SysUserEntity.hbm.xml"/>
+        <mapping class="smart.utils.data.SysUserEntity"/>
 
         <!-- DB schema will be updated if needed -->
 

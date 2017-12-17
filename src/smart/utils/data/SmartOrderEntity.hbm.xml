@@ -5,95 +5,35 @@
 <hibernate-mapping>
 
     <class name="smart.utils.data.SmartOrderEntity" table="smart_order" schema="smartmall">
-        <id name="id">
-            <column name="id" sql-type="int(10) unsigned"/>
-        </id>
-        <property name="userId">
-            <column name="user_id" sql-type="int(11) unsigned"/>
-        </property>
-        <property name="paymentId">
-            <column name="payment_id" sql-type="int(11)"/>
-        </property>
-        <property name="deliveryId">
-            <column name="delivery_id" sql-type="int(11)" not-null="true"/>
-        </property>
-        <property name="merchandise">
-            <column name="merchandise" sql-type="varchar(300)" length="300" not-null="true"/>
-        </property>
-        <property name="status">
-            <column name="status" sql-type="tinyint(1)" not-null="true"/>
-        </property>
-        <property name="payStatus">
-            <column name="pay_status" sql-type="tinyint(1)" not-null="true"/>
-        </property>
-        <property name="distributionStatus">
-            <column name="distribution_status" sql-type="tinyint(1)" not-null="true"/>
-        </property>
-        <property name="dueAmount">
-            <column name="due_amount" sql-type="decimal(15,2)" precision="15" scale="2" not-null="true"/>
-        </property>
-        <property name="paidAmount">
-            <column name="paid_amount" sql-type="decimal(15,2)" precision="15" scale="2"/>
-        </property>
-        <property name="taxes">
-            <column name="taxes" sql-type="decimal(15,2)" precision="15" scale="2"/>
-        </property>
-        <property name="payableFreight">
-            <column name="payable_freight" sql-type="decimal(15,2)" precision="15" scale="2"/>
-        </property>
-        <property name="realFreight">
-            <column name="real_freight" sql-type="decimal(15,2)" precision="15" scale="2"/>
-        </property>
-        <property name="payFee">
-            <column name="pay_fee" sql-type="decimal(15,2)" precision="15" scale="2"/>
-        </property>
-        <property name="promotions">
-            <column name="promotions" sql-type="decimal(15,2)" precision="15" scale="2"/>
-        </property>
-        <property name="discount">
-            <column name="discount" sql-type="decimal(15,2)" precision="15" scale="2"/>
-        </property>
-        <property name="orderAmount">
-            <column name="order_amount" sql-type="decimal(15,2)" precision="15" scale="2"/>
-        </property>
-        <property name="payTime">
-            <column name="pay_time" sql-type="datetime" not-null="true"/>
-        </property>
-        <property name="sendTime">
-            <column name="send_time" sql-type="datetime" not-null="true"/>
-        </property>
-        <property name="createTime">
-            <column name="create_time" sql-type="datetime" not-null="true"/>
-        </property>
-        <property name="completionTime">
-            <column name="completion_time" sql-type="datetime" not-null="true"/>
-        </property>
-        <property name="acceptTime">
-            <column name="accept_time" sql-type="varchar(80)" length="80" not-null="true"/>
-        </property>
-        <property name="invoice">
-            <column name="invoice" sql-type="tinyint(1)"/>
-        </property>
-        <property name="invoiceTitle">
-            <column name="invoice_title" sql-type="varchar(100)" length="100" not-null="true"/>
-        </property>
-        <property name="postscript">
-            <column name="postscript" sql-type="varchar(255)" not-null="true"/>
-        </property>
-        <property name="note">
-            <column name="note" sql-type="text" not-null="true"/>
-        </property>
-        <property name="prop">
-            <column name="prop" sql-type="varchar(255)" not-null="true"/>
-        </property>
-        <property name="exp">
-            <column name="exp" sql-type="smallint(5) unsigned"/>
-        </property>
-        <property name="point">
-            <column name="point" sql-type="smallint(5) unsigned"/>
-        </property>
-        <property name="type">
-            <column name="type" sql-type="tinyint(1) unsigned"/>
-        </property>
+        <id name="id" column="id"/>
+        <property name="userId" column="user_id"/>
+        <property name="paymentId" column="payment_id"/>
+        <property name="deliveryId" column="delivery_id"/>
+        <property name="merchandise" column="merchandise"/>
+        <property name="status" column="status"/>
+        <property name="payStatus" column="pay_status"/>
+        <property name="distributionStatus" column="distribution_status"/>
+        <property name="dueAmount" column="due_amount"/>
+        <property name="paidAmount" column="paid_amount"/>
+        <property name="taxes" column="taxes"/>
+        <property name="payableFreight" column="payable_freight"/>
+        <property name="realFreight" column="real_freight"/>
+        <property name="payFee" column="pay_fee"/>
+        <property name="promotions" column="promotions"/>
+        <property name="discount" column="discount"/>
+        <property name="orderAmount" column="order_amount"/>
+        <property name="payTime" column="pay_time"/>
+        <property name="sendTime" column="send_time"/>
+        <property name="createTime" column="create_time"/>
+        <property name="completionTime" column="completion_time"/>
+        <property name="acceptTime" column="accept_time"/>
+        <property name="invoice" column="invoice"/>
+        <property name="invoiceTitle" column="invoice_title"/>
+        <property name="postscript" column="postscript"/>
+        <property name="note" column="note"/>
+        <property name="prop" column="prop"/>
+        <property name="exp" column="exp"/>
+        <property name="point" column="point"/>
+        <property name="type" column="type"/>
     </class>
 </hibernate-mapping>
