@@ -12,7 +12,6 @@
 
         <property name="connection.username">smartmall</property>
         <property name="connection.password">smartmall</property>
-
         <property name="c3p0.minPoolSize">3</property>
         <property name="c3p0.maxPoolSize">5</property>
         <property name="c3p0.acquireIncrement">1</property>

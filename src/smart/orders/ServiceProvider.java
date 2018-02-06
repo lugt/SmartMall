@@ -8,6 +8,7 @@ import smart.utils.core.LoggerManager;
 import smart.utils.data.HttpsUtil;
 import smart.utils.data.UrlEncode;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.Map;
@@ -75,7 +76,11 @@ public class ServiceProvider implements IServiceProvider {
             }else if("find_uid".equals(outer)){
                 // 注册 ... -> uid
                 try {
-                    return OrderCreate.findUid(Math.toIntExact(uid),100);
+                    int len = 5;
+                    if(x.get("len") != null){
+                        len = Integer.parseInt(x.get("len"));
+                    }
+                    return OrderCreate.findUid(Math.toIntExact(uid),len);
                 }catch (Exception e){
                     return "{\"msg\": \"请检查输入\",\"code\":-1014}";
                 }

@@ -8,8 +8,10 @@ import io.netty.buffer.ByteBuf;
 import org.json.JSONObject;
 import smart.server.IServiceProvider;
 import smart.server.ServiceRegistry;
+import smart.utils.core.LoggerManager;
 import smart.utils.data.HttpsUtil;
 import smart.utils.data.UrlEncode;
+import sun.rmi.runtime.Log;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Map;
@@ -83,13 +85,24 @@ public class ServiceProvider implements IServiceProvider {
             }else if ("list_top".equals(outer)) {
                 try {
                     int length = Integer.valueOf(x.get("len"));
-                    if(length < 1 || length > 1000){
+                    if (length < 1 || length > 1000) {
                         return "{\"msg\":\"数量不正确\",\"code\":-4009}";
                     }
                     return GoodInfo.findTop(length);
                 } catch (Exception e) {
                     e.printStackTrace();
                     return "{\"msg\":\"创建操作出现异常\",\"code\":-4002}";
+                }
+            }else if("feedback".equals(outer)){
+                try {
+                    JSONObject xa = new JSONObject(data);
+                    String op = "-", acc = "-", call = "-";
+                    if (xa.has("op")) op = xa.getString("op");
+                    if (xa.has("call")) call = xa.getString("call");
+                    if (xa.has("acc")) acc = xa.getString("acc");
+                    LoggerManager.userFeedBack(op, acc, call);
+                }catch (Exception e){
+                    LoggerManager.i("保存用户反馈出错！" + e.getMessage());
                 }
             }else{
                 return "{\"msg\":\"没有选择操作\",\"code\":-4001}";

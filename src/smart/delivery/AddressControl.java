@@ -65,13 +65,16 @@ public class AddressControl {
         }
     }
 
-    public String commitSaveUserAddr(int uid, int addr1, int addr2, int addr3, int addr4) {
+    public String commitSaveUserAddr(int uid, int num, int addrid) {
         try{
+            if(num < 0 || num > 9) {
+                return "{\"msg\": \"无法保存错误的地址号码\",\"code\":-7005}";
+            }
             Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
-            LoggerManager.i("Saving User Addr : addr1 : "+addr1+" , uid - " + uid);
+            LoggerManager.i("Saving User Addr : num : "+num+"-aaid:"+addrid+" , uid - " + uid);
             Query q = session.createQuery("from SmartUserAddrsEntity where uid=:uu");
-            q.setParameter("uu",uid);
+            q.setParameter("uu", uid);
             q.setMaxResults(1);
             SmartUserAddrsEntity suae = (SmartUserAddrsEntity) q.uniqueResult();
             if(suae == null || suae.getUid() < 1) {
@@ -83,23 +86,18 @@ public class AddressControl {
             }else {
                 //LoggerManager.i("Recheck - Updating : suae.uid = " + suae.getUid());
             }
-
-            if(addr1 != 0) {
-                suae.setAddr1(addr1);
-                suae.setDefaultaddr(addr1);
+            switch (num){
+                case 1:  suae.setAddr1(addrid); break;
+                case 2:  suae.setAddr2(addrid); break;
+                case 3:  suae.setAddr3(addrid); break;
+                case 4:  suae.setAddr4(addrid); break;
+                case 5:  suae.setAddr5(addrid); break;
+                case 6:  suae.setAddr6(addrid); break;
+                case 7:  suae.setAddr7(addrid); break;
+                case 8:  suae.setAddr8(addrid); break;
+                case 9:  suae.setAddr9(addrid); break;
             }
-            if(addr2 != 0) {
-                suae.setAddr2(addr2);
-                suae.setDefaultaddr(addr2);
-            }
-            if(addr3 != 0) {
-                suae.setAddr3(addr3);
-                suae.setDefaultaddr(addr3);
-            }
-            if(addr4 != 0) {
-                suae.setAddr4(addr4);
-                suae.setDefaultaddr(addr4);
-            }
+            suae.setDefaultaddr(addrid);
             session.saveOrUpdate(suae);
             DataService.finishUp(session,tx);
             return formatAddrs(suae).toString();
@@ -107,7 +105,7 @@ public class AddressControl {
             Long k = System.currentTimeMillis();
             e.printStackTrace();
             Monitor.logger("[Commit Fail] ID:" + k.toString() + " / " + e.getMessage());
-            return "{\"msg\": \"无法搜索地址信息\",\"code\":-7005}";
+            return "{\"msg\": \"无法保存地址信息\",\"code\":-7005}";
         }
     }
 
@@ -161,7 +159,7 @@ public class AddressControl {
             SmartDeliveryAddrEntity soe = (SmartDeliveryAddrEntity) q.uniqueResult();
             DataService.finishUp(session,tx);
             if(soe == null || soe.getAddrid() <= 0){
-                return "{\"msg\": \"没有得到订单\",\"code\":-7001}";
+                return "{\"msg\": \"没有这个地址的信息\",\"code\":-7001}";
             }
             JSONObject jsob = new JSONObject();
             jsob.put("code",1000);

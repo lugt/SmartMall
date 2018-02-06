@@ -33,7 +33,7 @@ public class UserReg {
         SmartUsersEntity udE = new SmartUsersEntity();
         udE.setName(dispName);
         udE.setUsn("cell_" + cellphone);
-        udE.setPhone(String.valueOf(cellphone));
+        udE.setPhone(cellphone);
         udE.setPriv("view,order,deliver,pay");
         Session session = null;
         Transaction tx = null;

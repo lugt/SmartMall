@@ -13,7 +13,10 @@ import smart.utils.data.HttpsUtil;
 import smart.utils.data.SmartOrderEntity;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -55,9 +58,10 @@ public class OrderCreate{
             JSONObject onegood = (JSONObject) oneg;
             int goodid = onegood.getInt("id");
             int model = onegood.getInt("model");
+            JSONArray specs = onegood.getJSONArray("spec");
             int quantity = onegood.getInt("q");
             // 计算价格
-            BigDecimal Price = calcCommidityValue(goodid,model,quantity);
+            BigDecimal Price = calcCommidityValue(goodid,model,quantity,specs);
             if(Price.equals(BigDecimal.valueOf(-100000))){
                 return null;
             }
@@ -202,7 +206,7 @@ public class OrderCreate{
         try {
             Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
-            Query q = session.createQuery("from SmartOrderEntity where userId = :uss");
+            Query q = session.createQuery("from SmartOrderEntity where userId = :uss order by id desc");
             q.setParameter("uss",uid);
             q.setMaxResults(len);
             List x = q.list();
@@ -247,14 +251,47 @@ public class OrderCreate{
         return jsob;
     }
 
-    public static BigDecimal calcCommidityValue(int goods_id, int models, double quantity) {
-        String url = ServiceRegistry.getUrl("commodity") + "?action=find_good&commodity="+goods_id;
+    public static BigDecimal calcCommidityValue(int goods_id, int models, double quantity, JSONArray specs) {
+        String url = null;
+        url = ServiceRegistry.getUrl("commodity") + "?action=find_good&commodity="+goods_id;
         try {
             String resposne = HttpsUtil.basicHttpPost(url,null);
             JSONObject jsobj = new JSONObject(resposne);
             if(jsobj.getInt("code") == 1000){
                 BigDecimal subTotal = BigDecimal.ZERO;
                 subTotal = subTotal.add(BigDecimal.valueOf(jsobj.getDouble("price")));
+                // 计算单价浮动
+                String specInfo = jsobj.getString("spec");
+                specInfo = URLDecoder.decode(specInfo,"utf-8");
+                JSONArray specinfoArray = new JSONArray(specInfo);
+                if(specinfoArray.length() != specs.length()){
+                    return BigDecimal.valueOf(-100000);
+                }
+                BigDecimal valueTotalProp = BigDecimal.ONE;
+                BigDecimal valueTotalAdd = BigDecimal.ZERO;
+                for(Object obj : specs){
+                    JSONObject selection = (JSONObject) obj;
+                    int specId = selection.getInt("i");
+                    String specVal = selection.getString("v");
+                    JSONObject thisSpec = findThisSpec(specId, specinfoArray);
+                    for(Object valobj : thisSpec.getJSONArray("vals")){
+                        JSONObject valJson = (JSONObject) valobj;
+                        if(valJson.getString("val").equals(specVal)) {
+                            BigDecimal addValue = BigDecimal.valueOf(valJson.getDouble("av"));
+                            BigDecimal valuePorportion = BigDecimal.valueOf(valJson.getDouble("vp"));
+                            if (!addValue.equals(BigDecimal.ZERO)) {
+                                valueTotalAdd = valueTotalAdd.add(addValue);
+                            }
+                            if (!valuePorportion.equals(BigDecimal.ONE)) {
+                                valueTotalProp = valueTotalProp.multiply(valuePorportion);
+                            }
+                            break;
+                        }
+                    }
+                }
+                subTotal = subTotal.add(valueTotalAdd);
+                subTotal = subTotal.multiply(valueTotalProp);
+                // 乘以
                 subTotal = subTotal.multiply(BigDecimal.valueOf(quantity));
                 // id + model -> 单价
                 // 单价 * quantity = 小计
@@ -268,6 +305,16 @@ public class OrderCreate{
             LoggerManager.i("calcCommoPrices : HTTPS/" +e.getMessage());
         }
         return BigDecimal.valueOf(-100000);
+    }
+
+    private static JSONObject findThisSpec(int specId, JSONArray jsonArray) {
+        for(Object obj : jsonArray){
+            JSONObject jsob = (JSONObject) obj;
+            if(jsob.getInt("id") == specId){
+                return jsob;
+            }
+        }
+        return null;
     }
 
     public static String parseCreate(int uid, String products, int payment, int delivery, int delAddr, String token) throws JSONException{

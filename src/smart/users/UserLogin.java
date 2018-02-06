@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import smart.server.DataService;
+import smart.utils.BeanUtil;
 import smart.utils.core.LoggerManager;
 import smart.utils.data.SmartUsersEntity;
 
@@ -17,6 +18,28 @@ import smart.utils.data.SmartUsersEntity;
  * Earth - Moudule ${PACKAGE_NAME}
  */
 public class UserLogin {
+
+    public static boolean setValonToken(Object val, String name, String token){
+        try {
+            Session session = DataService.getSessionA();
+            Transaction tx = DataService.getTransact(session);
+            Query q = session.createQuery("from SmartUsersEntity where sess = :sess");
+            q.setParameter("sess", token);
+            SmartUsersEntity udE = (SmartUsersEntity) q.uniqueResult();
+            if (udE != null){
+                BeanUtil.setFieldValueByName(udE,name,val);
+                DataService.finishUp(session,tx);
+                return true;
+            }
+            DataService.finishUp(session,tx);
+            return false;
+        } catch (Exception es) {
+            Monitor.logger("[GetEtid]" + es.getMessage());
+            es.printStackTrace();
+            return false;
+        }
+    }
+
 
     public static long getEtidOnSSid(String ssid) {
         try {
@@ -121,4 +144,20 @@ public class UserLogin {
         return result;
     }
 
+    public static SmartUsersEntity getUdeOnSSid(String ssid) {
+        try {
+            Session session = DataService.getSessionA();
+            Transaction tx = DataService.getTransact(session);
+            Query q = session.createQuery("from SmartUsersEntity where sess = :sess");
+            q.setParameter("sess", ssid);
+            SmartUsersEntity udE = (SmartUsersEntity) q.uniqueResult();
+            DataService.finishUp(session,tx);
+            if (udE == null) return null;
+            return udE;
+        } catch (Exception es) {
+            Monitor.logger("[GetEtid]" + es.getMessage());
+            es.printStackTrace();
+            return null;
+        }
+    }
 }

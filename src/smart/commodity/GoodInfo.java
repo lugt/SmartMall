@@ -110,6 +110,7 @@ public class GoodInfo {
         jsw.put("listimg",sme.getListImg());
         jsw.put("marketprice",sme.getMarketPrice());
         jsw.put("modelid",sme.getModelId());
+        jsw.put("spec",sme.getSpecArray());
         jsw.put("name",sme.getName());
         jsw.put("point",sme.getPoint());
         jsw.put("searchword",sme.getSearchWords());
@@ -152,12 +153,12 @@ public class GoodInfo {
             return "{\"msg\": \"无法找寻商品\",\"code\":-4004}";
         }
     }
-
+    
     public static String findTop(int len) {
         try {
             Session session = DataService.getSessionA();
             Transaction tx = DataService.getTransact(session);
-            Query q = session.createQuery("from SmartGoodsEntity");
+            Query q = session.createQuery("from SmartGoodsEntity order by sort asc");
             q.setMaxResults(len);
             List a = q.list();
             if(a == null || a.size() <= 0){

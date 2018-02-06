@@ -1,10 +1,13 @@
 package smart.users;
 
+import earth.server.user.Signin;
 import io.netty.buffer.ByteBuf;
 import org.json.JSONObject;
 import smart.server.IServiceProvider;
+import smart.utils.data.SmartUsersEntity;
 import smart.utils.data.UrlEncode;
 
+import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.Map;
 
@@ -47,12 +50,31 @@ public class ServiceProvider implements IServiceProvider {
                 }catch (Exception e){
                     return "{\"msg\": \"请检查输入\",\"code\":-1015}";
                 }
+            }else if("chgpass".equals(outer)){
+                try {
+                    String token = x.get("token");
+                    String val = URLDecoder.decode(x.get("val"),"utf-8");
+                    if(token == null || token.length() == 0 || val == null || val.length() <= 0){
+                        return "{\"msg\": \"Token不完整\",\"code\":-2011}";
+                    }
+                    int uid = (int) UserLogin.getEtidOnSSid(token);
+                    if(uid <= 0) return "{\"msg\": \"请检查输入\",\"code\":-10151}";
+                    String passWd = Signin.PasswordDigest(uid, val);
+                    if(UserLogin.setValonToken(passWd, "pss" ,token)){
+                        return "{\"code\": 1000}";
+                    }else{
+                        return "{\"msg\": \"请检查输入\",\"code\":-10141}";
+                    }
+
+                }catch (Exception e){
+                    return "{\"msg\": \"请检查输入\",\"code\":-10142}";
+                }
             }else if("reg".equals(outer)){
                 // 注册 ... -> uid
                 try {
                     String phone = x.get("phone");
                     Long cell = Long.parseLong(phone);
-                    String pass = x.get("pass");
+                    String pass = URLDecoder.decode(x.get("pass"),"utf-8");
                     String name = x.get("name");
                     if(pass != null && cell > 0 && name != null && pass.length() > 0 && name.length() > 0) {
                         return UserReg.commitCreate(cell, pass, name);
@@ -74,7 +96,7 @@ public class ServiceProvider implements IServiceProvider {
                     }catch (Exception e){
                         return "{\"msg\": \"请输入手机号码\",\"code\":-1012}";
                     }
-                    String pass = x.get("pass");
+                    String pass = URLDecoder.decode(x.get("pass"),"utf-8");
                     return UserLogin.commitLogin(cell,pass);
                 } catch (Exception e) {
                     e.printStackTrace();

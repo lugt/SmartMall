@@ -37,7 +37,7 @@ public class LoginCache {
         jsob.put("code",1000);
         jsob.put("uid",udE.getUid());
         jsob.put("priv",udE.getPriv());
-        jsob.put("phone",udE.getPhone());
+        jsob.put("phone",String.valueOf(udE.getPhone()));
         jsob.put("name",udE.getName());
         jsob.put("title",udE.getTitle());
         jsob.put("status",udE.getState());

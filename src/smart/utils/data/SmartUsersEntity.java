@@ -14,7 +14,7 @@ public class SmartUsersEntity {
     private String priv;
     private int state;
     private String sess;
-    private String phone;
+    private Long phone;
 
     @Id
     @Column(name = "uid")
@@ -98,11 +98,11 @@ public class SmartUsersEntity {
 
     @Basic
     @Column(name = "phone")
-    public String getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 

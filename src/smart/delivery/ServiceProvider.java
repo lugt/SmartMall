@@ -37,7 +37,7 @@ public class ServiceProvider implements IServiceProvider {
         try {
             String token = x.get("token");
             String userInfo = HttpsUtil.basicHttpPost(ServiceRegistry.getUrl("users") + "?action=oauth&token="+token,null);
-            LoggerManager.i(userInfo);
+            //LoggerManager.i(userInfo);
             JSONObject jsob = new JSONObject(userInfo);
             uid = jsob.getInt("uid");
         }catch (Exception e){
@@ -52,14 +52,12 @@ public class ServiceProvider implements IServiceProvider {
             outer = x.get("action");
             if ("user_set_addrs".equals(outer)) {
                 try {
-                    int addr1 = Integer.valueOf(x.get("addr1"));
-                    int addr2 = Integer.valueOf(x.get("addr2"));
-                    int addr3 = Integer.valueOf(x.get("addr3"));
-                    int addr4 = Integer.valueOf(x.get("addr4"));
-                    return new AddressControl().commitSaveUserAddr(uid,addr1,addr2,addr3,addr4);
+                    int num = Integer.valueOf(x.get("num"));
+                    int addrid = Integer.valueOf(x.get("addrid"));
+                    return new AddressControl().commitSaveUserAddr(uid,num,addrid);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return "{\"msg\":\"创建操作出现异常\",\"code\":-7013}";
+                    return "{\"msg\":\"保存用户地址总和操作出现异常\",\"code\":-7013}";
                 }
             }else if ("address_get".equals(outer)) {
                 try {
@@ -67,7 +65,7 @@ public class ServiceProvider implements IServiceProvider {
                     return new AddressControl().getAddrInfo(addrid);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return "{\"msg\":\"创建操作出现异常\",\"code\":-7012}";
+                    return "{\"msg\":\"单条用户地址查询出现异常\",\"code\":-7012}";
                 }
             }else if ("address_set".equals(outer)) {
                 try {
